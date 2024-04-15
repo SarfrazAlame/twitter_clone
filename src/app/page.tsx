@@ -1,9 +1,13 @@
-import Image from "next/image";
+import { getServerSession } from 'next-auth'
+import React from 'react'
+import { authOptions } from './lib/auth'
 
-export default function Home() {
+const page = async() => {
+   const session = await getServerSession(authOptions)
+   console.log(session)
   return (
-    <div>
-      main
-    </div>
+    <div>page</div>
   )
 }
+  
+export default page

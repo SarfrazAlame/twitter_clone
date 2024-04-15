@@ -7,51 +7,98 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model VerificationToken {
+  id         Int      @id @default(autoincrement())
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+}
+
+model Account {
+  id                 String  @id @default(cuid())
+  userId             String
+  type               String
+  provider           String
+  providerAccountId  String
+  refresh_token      String? @db.Text
+  access_token       String? @db.Text
+  expires_at         Int?
+  token_type         String?
+  scope              String?
+  id_token           String? @db.Text
+  session_state      String?
+  oauth_token_secret String?
+  oauth_token        String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId       String
+
+  @@index([userId])
+}
+
 model User {
-  id       Int       @id @default(autoincrement())
-  username String    @unique
-  name     String?
-  email    String    @unique
-  password String
-  bio      String?
-  posts    Post[]
-  likes    Like[]
-  comments Comment[]
-  Follow   Follow[]
+  id         String    @id @default(cuid())
+  username   String    @unique
+  name       String?
+  email      String    @unique
+  password   String
+  bio        String?
+  posts      Post[]
+  likes      Like[]
+  comments   Comment[]
+  Account    Account[]
+  Session    Session[]
+  followedBy Follows[] @relation("following")
+  following  Follows[] @relation("follower")
+}
+
+model Follows {
+  follower    User   @relation("follower", fields: [followerId], references: [id])
+  followerId  String
+  following   User   @relation("following", fields: [followingId], references: [id])
+  followingId String
+
+  @@id([followerId, followingId])
+  @@index([followerId])
+  @@index([followingId])
 }
 
 model Post {
-  id        Int      @id @default(autoincrement())
+  id        String   @id @default(cuid())
   title     String
   imgUrl    String?
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   likes     Like[]
 
-  User    User?     @relation(fields: [userId], references: [id])
-  userId  Int?
+  User    User      @relation(fields: [userId], references: [id])
+  userId  String
   Comment Comment[]
 }
 
 model Like {
-  id     Int   @id @default(autoincrement())
-  User   User? @relation(fields: [userId], references: [id])
-  userId Int?
-  Post   Post? @relation(fields: [postId], references: [id])
-  postId Int?
+  id     String @id @default(cuid())
+  User   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId String
+  Post   Post?  @relation(fields: [postId], references: [id])
+  postId String
 }
 
 model Comment {
-  id     Int   @id @default(autoincrement())
-  Post   Post? @relation(fields: [postId], references: [id])
-  postId Int?
-  User   User? @relation(fields: [userId], references: [id])
-  userId Int?
-}
-
-model Follow {
-  id Int @id @default(autoincrement())
-
-  User   User? @relation(fields: [userId], references: [id])
-  userId Int?
+  id     String @id @default(cuid())
+  Post   Post?  @relation(fields: [postId], references: [id])
+  postId String
+  User   User?  @relation(fields: [userId], references: [id])
+  userId String
 }

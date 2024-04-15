@@ -31,20 +31,36 @@ export const authOptions: NextAuthOptions = {
             return session
         },
 
-        async jwt({ token, session }) {
+        async jwt({ token, user }) {
             const prismaUser = await prisma.user.findFirst({
                 where: {
                     email: token.email
                 },
             });
 
+            if (!prismaUser) {
+                token.id = user.id
+                return token
+            }
+
+            if (!prismaUser.username) {
+                await prisma.user.update({
+                    where: {
+                        id: prismaUser.id
+                    },
+                    data: {
+                        username: prismaUser.name?.split(" ").join("").toLowerCase()
+                    }
+                })
+            }
+
             return {
                 id: token.id,
                 name: token.name,
                 email: token.email,
                 picture: token.picture,
+                username: token.username
             }
         },
     },
-    debug: process.env.NODE_ENV === "development"
 }

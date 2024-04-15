@@ -7,7 +7,7 @@ import React from "react";
 const page = async () => {
   return (
     <div>
-      <button onClick={() => signIn("google")} className="mt-12">
+      <button onClick={() => signIn("google", {callbackUrl:"/explore"})} className="mt-12">
         Login with google
       </button>
     </div>
