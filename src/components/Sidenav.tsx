@@ -1,25 +1,13 @@
+// "use client";
 import Link from "next/link";
 import React from "react";
 import { BsSend } from "react-icons/bs";
-import { CgMoreO, CgProfile } from "react-icons/cg";
+import { CgProfile } from "react-icons/cg";
 import { FaXTwitter } from "react-icons/fa6";
-import {
-  IoNotificationsOutline,
-  IoSearchOutline,
-  IoSettingsOutline,
-} from "react-icons/io5";
+import { IoNotificationsOutline, IoSearchOutline } from "react-icons/io5";
 import { MdHomeFilled, MdOutlineMessage } from "react-icons/md";
 import UserProfile from "./UserProfile";
 import Dropdown from "./Dropdown";
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTrigger,
-} from "./ui/dialog";
-import { getServerSession } from "next-auth";
-import Image from "next/image";
-import { Input } from "./ui/input";
 
 const LogoBar = [
   {
@@ -50,7 +38,6 @@ const LogoBar = [
 ];
 
 const SideNav = async () => {
-  const session = await getServerSession();
   return (
     <>
       <div className="">
@@ -61,7 +48,6 @@ const SideNav = async () => {
           <div className="">
             {LogoBar.map((item) => {
               const IconItem = item.icon;
-
               return (
                 <Link
                   key={item.name}
@@ -77,29 +63,6 @@ const SideNav = async () => {
           <div>
             <Dropdown />
           </div>
-
-          <Dialog>
-            <DialogTrigger>
-              <button className="bg-blue-500 hidden lg:flex text-white w-40 py-3 px-16 text-xl rounded-full">
-                Post
-              </button>
-            </DialogTrigger>
-            <DialogContent>
-              <Image
-                src={session?.user.image}
-                alt={session?.user.name}
-                width={40}
-                height={40}
-                className="rounded-full"
-              />
-              <DialogHeader>
-                <Input
-                  className="h-24 text-2xl"
-                  placeholder="What is happening?!"
-                />
-              </DialogHeader>
-            </DialogContent>
-          </Dialog>
 
           <BsSend className="lg:hidden flex mx-2 bg-blue-500 w-10 h-10 text-white p-2 rounded-full" />
 

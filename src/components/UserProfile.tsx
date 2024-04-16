@@ -6,6 +6,7 @@ const UserProfile = async () => {
   const session = await getServerSession();
   return (
     <div className="">
+      
       <div className="flex gap-3">
         <Image
           src={session?.user.image}
