@@ -48,19 +48,20 @@ model Session {
 }
 
 model User {
-  id         String    @id @default(cuid())
-  username   String?   
-  name       String
-  email      String    @unique
-  image      String?
-  bio        String?
-  posts      Post[]
-  likes      Like[]
-  comments   Comment[]
-  Account    Account[]
-  Session    Session[]
-  followedBy Follows[] @relation("following")
-  following  Follows[] @relation("follower")
+  id            String    @id @default(cuid())
+  username      String?
+  name          String
+  email         String    @unique
+  image         String?
+  bio           String?
+  emailVerified DateTime?
+  posts         Post[]
+  likes         Like[]
+  comments      Comment[]
+  Account       Account[]
+  Session       Session[]
+  followedBy    Follows[] @relation("following")
+  following     Follows[] @relation("follower")
 }
 
 model Follows {

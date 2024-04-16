@@ -7,7 +7,6 @@ import { Adapter } from 'next-auth/adapters'
 export const authOptions: NextAuthOptions = {
     adapter: PrismaAdapter(prisma) as Adapter,
     providers: [
-            
         GoogleProvider({
             clientId: process.env.GOOGLE_CLIENT_ID || "",
             clientSecret: process.env.GOOGLE_CLIENT_SECRET || "",
@@ -21,10 +20,48 @@ export const authOptions: NextAuthOptions = {
     session: {
         strategy: "jwt"
     },
-    debug:true,
+    debug: true,
     callbacks: {
-       session:({token,user})=>{
-        
-       }
+        session: ({ token, session }) => {
+            if (token) {
+                session.user.id = token.sub
+                session.user.username = token.username
+                session.user.email = token.email
+                session.user.name = token.name
+                session.user.image = token.picture
+            }
+            return session
+        },
+        jwt: async ({ token, user }) => {
+            const prismaUser = await prisma.user.findFirst({
+                where: {
+                    email: token.email
+                }
+            })
+
+            if (!prismaUser) {
+                token.id = user.id
+                return token
+            }
+
+            if (!prismaUser.username) {
+                await prisma.user.update({
+                    where: {
+                        id: prismaUser.id
+                    },
+                    data: {
+                        username: prismaUser.name?.split(" ").join("")
+                    }
+                })
+            }
+
+            return {
+                id: prismaUser?.id,
+                name: prismaUser.name,
+                username: prismaUser.name,
+                email: prismaUser.email,
+                image: prismaUser.image
+            }
+        }
     },
 }
