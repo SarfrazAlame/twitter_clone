@@ -9,21 +9,17 @@ import {
   IoSettingsOutline,
 } from "react-icons/io5";
 import { MdHomeFilled, MdOutlineMessage } from "react-icons/md";
+import UserProfile from "./UserProfile";
+import Dropdown from "./Dropdown";
 import {
   Dialog,
   DialogContent,
   DialogHeader,
-  DialogTitle,
   DialogTrigger,
 } from "./ui/dialog";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "./ui/dropdown-menu";
-import { AiOutlineLogout } from "react-icons/ai";
-import UserProfile from "./UserProfile";
+import { getServerSession } from "next-auth";
+import Image from "next/image";
+import { Input } from "./ui/input";
 
 const LogoBar = [
   {
@@ -53,7 +49,8 @@ const LogoBar = [
   },
 ];
 
-const SideNav = () => {
+const SideNav = async () => {
+  const session = await getServerSession();
   return (
     <>
       <div className="">
@@ -77,41 +74,33 @@ const SideNav = () => {
               );
             })}
           </div>
-          <div className="mx-2">
-            <div>
-              <DropdownMenu>
-                <DropdownMenuTrigger>
-                  <div className="flex gap-3">
-                    <CgMoreO className="text-3xl" />
-                    <p>More</p>
-                  </div>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent>
-                  <DropdownMenuItem>
-                    <div className="flex gap-2">
-                      <CgProfile className="text-xl" />
-                      <p>Profile</p>
-                    </div>
-                  </DropdownMenuItem>
-                  <DropdownMenuItem>
-                    <div className="flex gap-2">
-                      <AiOutlineLogout className="text-xl" />
-                      <p>Logout</p>
-                    </div>
-                  </DropdownMenuItem>
-                  <DropdownMenuItem>
-                    <div className="flex gap-2">
-                      <IoSettingsOutline className="text-xl" />
-                      <p>Setting & privacy</p>
-                    </div>
-                  </DropdownMenuItem>
-                </DropdownMenuContent>
-              </DropdownMenu>
-            </div>
+          <div>
+            <Dropdown />
           </div>
-          <button className="bg-blue-500 hidden lg:flex text-white w-40 py-3 px-16 text-xl rounded-full">
-            Post
-          </button>
+
+          <Dialog>
+            <DialogTrigger>
+              <button className="bg-blue-500 hidden lg:flex text-white w-40 py-3 px-16 text-xl rounded-full">
+                Post
+              </button>
+            </DialogTrigger>
+            <DialogContent>
+              <Image
+                src={session?.user.image}
+                alt={session?.user.name}
+                width={40}
+                height={40}
+                className="rounded-full"
+              />
+              <DialogHeader>
+                <Input
+                  className="h-24 text-2xl"
+                  placeholder="What is happening?!"
+                />
+              </DialogHeader>
+            </DialogContent>
+          </Dialog>
+
           <BsSend className="lg:hidden flex mx-2 bg-blue-500 w-10 h-10 text-white p-2 rounded-full" />
 
           <div className="mt-20">
