@@ -24,11 +24,11 @@ export const authOptions: NextAuthOptions = {
     callbacks: {
         session: ({ token, session }) => {
             if (token) {
-                session.user.id = token.sub
+                session.user.id = token.id
                 session.user.username = token.username
                 session.user.email = token.email
                 session.user.name = token.name
-                session.user.image = token.picture
+                session.user.image = token.image as string
             }
             return session
         },

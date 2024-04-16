@@ -39,7 +39,7 @@ const SideNav = () => {
   const pathName = usePathname();
   return (
     <div className="flex flex-col gap-5 mt-2">
-      <Link href={'/'} className="mx-3">
+      <Link href={"/"} className="mx-3">
         <FaXTwitter className="text-4xl cursor-pointer" />
       </Link>
       <div className="">
@@ -60,12 +60,12 @@ const SideNav = () => {
         })}
       </div>
       <div>
-        <button className="bg-blue-500 text-white w-40 py-3 rounded-full">Post</button>
+        <button className="bg-blue-500 text-white w-40 py-3 rounded-full">
+          Post
+        </button>
       </div>
 
-      <div>
-        {/* user profile details */}
-      </div>
+      <div>{/* user profile details */}</div>
     </div>
   );
 };
