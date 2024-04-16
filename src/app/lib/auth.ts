@@ -7,9 +7,11 @@ import { Adapter } from 'next-auth/adapters'
 export const authOptions: NextAuthOptions = {
     adapter: PrismaAdapter(prisma) as Adapter,
     providers: [
+            
         GoogleProvider({
             clientId: process.env.GOOGLE_CLIENT_ID || "",
-            clientSecret: process.env.GOOGLE_CLIENT_SECRET || ""
+            clientSecret: process.env.GOOGLE_CLIENT_SECRET || "",
+            allowDangerousEmailAccountLinking: true
         })
     ],
     pages: {
@@ -19,48 +21,10 @@ export const authOptions: NextAuthOptions = {
     session: {
         strategy: "jwt"
     },
+    debug:true,
     callbacks: {
-        async session({ session, token }) {
-            if (token) {
-                session.user.id = token.id;
-                session.user.name = token.name;
-                session.user.email = token.email;
-                session.user.image = token.picture;
-                session.user.username = token.username
-            }
-            return session
-        },
-
-        async jwt({ token, user }) {
-            const prismaUser = await prisma.user.findFirst({
-                where: {
-                    email: token.email
-                },
-            });
-
-            if (!prismaUser) {
-                token.id = user.id
-                return token
-            }
-
-            if (!prismaUser.username) {
-                await prisma.user.update({
-                    where: {
-                        id: prismaUser.id
-                    },
-                    data: {
-                        username: prismaUser.name?.split(" ").join("").toLowerCase()
-                    }
-                })
-            }
-
-            return {
-                id: token.id,
-                name: token.name,
-                email: token.email,
-                picture: token.picture,
-                username: token.username
-            }
-        },
+       session:({token,user})=>{
+        
+       }
     },
 }

@@ -3,6 +3,8 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import SideNav from "@/components/Sidenav";
 import SideBar from "@/components/Sidebar";
+import { SessionProvider } from "next-auth/react";
+import AuthProvider from "@/components/AuthProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -24,7 +26,9 @@ export default function RootLayout({
             <div className="border-e flex justify-start lg:justify-center lg:w-full">
               <SideNav />
             </div>
-            <div className="flex justify-start">{children}</div>
+            <AuthProvider>
+              <div className="flex justify-start">{children}</div>
+            </AuthProvider>
             <div className="border-s hidden sm:flex">
               <SideBar />
             </div>
