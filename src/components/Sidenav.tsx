@@ -13,27 +13,27 @@ const LogoBar = [
   {
     name: "Home",
     icon: MdHomeFilled,
-    href: "/",
+    href: "/dashboard/home",
   },
   {
     name: "Explore",
     icon: IoSearchOutline,
-    href: "/explore",
+    href: "/dashboard/explore",
   },
   {
     name: "Notifications",
     icon: IoNotificationsOutline,
-    href: "/notification",
+    href: "/dashboard/notification",
   },
   {
     name: "Message",
     icon: MdOutlineMessage,
-    href: "/message",
+    href: "/dashboard/message",
   },
   {
     name: "Profile",
     icon: CgProfile,
-    href: "/profile",
+    href: "/dashboard/profile",
   },
 ];
 

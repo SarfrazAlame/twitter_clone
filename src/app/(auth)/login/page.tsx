@@ -6,7 +6,7 @@ const page = () => {
   return (
     <div>
       <div>
-        <button onClick={() => signIn("google", { callbackUrl: "/dashboard" })}>
+        <button onClick={() => signIn("google", { callbackUrl: "/dashboard/home" })}>
           Sign In With Google
         </button>
       </div>
