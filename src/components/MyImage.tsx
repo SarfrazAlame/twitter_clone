@@ -1,19 +1,11 @@
+"use client";
 import React from "react";
-import Image from "next/image";
-import { getServerSession } from "next-auth";
-
-const MyImage = async() => {
-    const session = await getServerSession()
+import UserImage from "./UserImage";
+const MyImage = async () => {
   return (
-    <div>
-      <Image
-        src={session?.user.image}
-        alt={session?.user.name}
-        width={40}
-        height={40}
-        className="rounded-full"
-      />
-    </div>
+    <>
+      <UserImage />
+    </>
   );
 };
 

@@ -10,7 +10,6 @@ import { DropdownMenuItem } from "@radix-ui/react-dropdown-menu";
 import { AiOutlineLogout } from "react-icons/ai";
 import { signOut } from "next-auth/react";
 import { IoSettingsOutline } from "react-icons/io5";
-import { redirect } from "next/navigation";
 
 const Dropdown = () => {
   return (
