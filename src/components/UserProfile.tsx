@@ -4,6 +4,7 @@ import React from "react";
 
 const UserProfile = async () => {
   const session = await getServerSession();
+  console.log(session)
   return (
     <div className="">
       

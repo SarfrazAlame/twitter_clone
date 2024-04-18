@@ -22,36 +22,49 @@ export const authOptions: NextAuthOptions = {
     },
     debug: true,
     callbacks: {
+        async session({ session, token }) {
+            console.log(session)
+            if (token) {
+                session.user.id = token.id
+                session.user.email = token.email
+                session.user.name = token.name
+                session.user.image = token.picture
+                session.user.username = token.username
+            }
+            return session
+        },
         async jwt({ token, user }) {
+            console.log(token)
             const prismaUser = await prisma.user.findFirst({
                 where: {
-                    email: token.email
+                    id: token.id
                 }
             })
 
             if (!prismaUser) {
-                token.sub = user.id
+                token.id = user.id
                 return token
+            }
+            console.log(prismaUser)
+
+            if (!prismaUser.username) {
+                await prisma.user.update({
+                    where: {
+                        id: prismaUser.id
+                    },
+                    data: {
+                        username: prismaUser.name?.split(" ").join("").toLowerCase()
+                    }
+                })
             }
 
             return {
                 id: prismaUser.id,
                 name: prismaUser.name,
-                username: prismaUser.name,
+                username: prismaUser.username,
                 email: prismaUser.email,
                 picture: prismaUser.image
             }
-        },
-
-        session: ({ token, session }) => {
-            if (token) {
-                session.user.id = token.sub
-                session.user.username = token.username
-                session.user.image = token.picture
-                session.user.email = token.email
-                session.user.name = token.name
-            }
-            return session
         },
     },
 }
