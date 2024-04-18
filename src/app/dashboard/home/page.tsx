@@ -9,6 +9,7 @@ const page = () => {
       <div className="mx-3">
         <FormHander />
       </div>
+      
     </div>
   );
 };

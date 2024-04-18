@@ -3,6 +3,7 @@ import { NextAuthOptions } from 'next-auth'
 import GoogleProvider from 'next-auth/providers/google'
 import prisma from './prisma'
 import { Adapter } from 'next-auth/adapters'
+import { User } from 'lucide-react'
 
 export const authOptions: NextAuthOptions = {
     adapter: PrismaAdapter(prisma) as Adapter,
@@ -22,49 +23,16 @@ export const authOptions: NextAuthOptions = {
     },
     debug: true,
     callbacks: {
+        async jwt({ token, user }) {
+            console.log("jwt callback", { token, user })
+
+            return token
+        },
         async session({ session, token }) {
-            console.log(session)
-            if (token) {
-                session.user.id = token.id
-                session.user.email = token.email
-                session.user.name = token.name
-                session.user.image = token.picture
-                session.user.username = token.username
-            }
+            console.log("session callback", { session, token })
+            
             return session
         },
-        async jwt({ token, user }) {
-            console.log(token)
-            const prismaUser = await prisma.user.findFirst({
-                where: {
-                    id: token.id
-                }
-            })
 
-            if (!prismaUser) {
-                token.id = user.id
-                return token
-            }
-            console.log(prismaUser)
-
-            if (!prismaUser.username) {
-                await prisma.user.update({
-                    where: {
-                        id: prismaUser.id
-                    },
-                    data: {
-                        username: prismaUser.name?.split(" ").join("").toLowerCase()
-                    }
-                })
-            }
-
-            return {
-                id: prismaUser.id,
-                name: prismaUser.name,
-                username: prismaUser.username,
-                email: prismaUser.email,
-                picture: prismaUser.image
-            }
-        },
     },
 }
