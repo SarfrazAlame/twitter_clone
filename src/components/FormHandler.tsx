@@ -17,11 +17,12 @@ import {
 } from "@/components/ui/select";
 import React from "react";
 import { useForm } from "react-hook-form";
-import { FaEarthAsia } from "react-icons/fa6";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "@/components/ui/button";
-import { useMount } from "@/hook/useMount";
+import Image from "next/image";
+import { UploadButton } from "@/utils/uploadthings";
+import { error } from "console";
 
 const formSchema = z.object({
   id: z.string(),
@@ -63,16 +64,34 @@ const FormHander = () => {
         <Form {...form}>
           <form className="mx-12" onSubmit={form.handleSubmit(onSubmit)}>
             {!!imageUrl ? (
-              <>main</>
+              <>
+                <div>
+                  <Image src={imageUrl} alt="image" height={60} width={60} />
+                </div>
+              </>
             ) : (
               <FormField
                 control={form.control}
                 name="imgUrl"
-                render={({field,fieldState})=>(
+                render={({ field, fieldState }) => (
                   <FormItem>
                     <FormLabel htmlFor="photo"></FormLabel>
                     <FormControl>
-                      
+                      <Input
+                        placeholder="What is happening"
+                        className="h-16 w-80"
+                      />
+                      <UploadButton
+                        endpoint="imageUploader"
+                        onClientUploadComplete={(res) => {
+                          form.setValue("imgUrl", res[0].url);
+                          alert("upload Completed");
+                        }}
+                        onUploadError={(error: Error) => {
+                          console.error(error);
+                          alert(`Error ${error.message}`);
+                        }}
+                      />
                     </FormControl>
                   </FormItem>
                 )}

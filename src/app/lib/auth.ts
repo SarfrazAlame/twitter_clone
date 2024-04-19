@@ -25,14 +25,40 @@ export const authOptions: NextAuthOptions = {
     debug: true,
     callbacks: {
         async session({ session, token }) {
-            console.log("session callback", { session, token })
-            session.user.id = token.id
+            if (token) {
+                session.user.id = token.id
+                session.user.email = token.email,
+                session.user.name = token.name
+                session.user.image = token.picture
+            }
             return session
         },
         async jwt({ token, user }) {
-            console.log("jwt callback", { token, user })
-            token.id = user.id
-            return token
+            const prismaUser = await prisma.user.findFirst({
+                where: {
+                    email: token.email
+                }
+            })
+            if (!prismaUser) {
+                token.id = user.id
+                return token
+            }
+            if (!prismaUser.username) {
+                await prisma.user.update({
+                    where: {
+                        id: prismaUser.id
+                    },
+                    data: {
+                        username: prismaUser.name?.split(" ").join("").toLowerCase()
+                    }
+                })
+            }
+            return {
+                id: prismaUser.id,
+                name:prismaUser.name,
+                email:prismaUser.email,
+                picture:prismaUser.image
+            }
         },
     },
 }
