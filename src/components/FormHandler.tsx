@@ -47,7 +47,7 @@ const FormHander = () => {
 
   return (
     <>
-      <div className="flex gap-4">
+      {/* <div className="flex gap-4">
         <Select>
           <SelectTrigger className="w-[110px] h-7 rounded-full">
             <SelectValue placeholder="Everyone" />
@@ -58,7 +58,7 @@ const FormHander = () => {
             <SelectItem value="system">System</SelectItem>
           </SelectContent>
         </Select>
-      </div>
+      </div> */}
 
       <div className="-mx-9 mt-2">
         <Form {...form}>

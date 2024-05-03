@@ -28,7 +28,7 @@ export const authOptions: NextAuthOptions = {
             if (token) {
                 session.user.id = token.id
                 session.user.email = token.email,
-                session.user.name = token.name
+                    session.user.name = token.name
                 session.user.image = token.picture
             }
             return session
@@ -55,9 +55,9 @@ export const authOptions: NextAuthOptions = {
             }
             return {
                 id: prismaUser.id,
-                name:prismaUser.name,
-                email:prismaUser.email,
-                picture:prismaUser.image
+                name: prismaUser.name,
+                email: prismaUser.email,
+                picture: prismaUser.image
             }
         },
     },
