@@ -24,7 +24,7 @@ export const ourFileRouter = {
                 uploadedBy: metadata.email
             };
         }),
-        // you can have video uploder here
+    // you can have video uploder here
 } satisfies FileRouter;
 
 export type OurFileRouter = typeof ourFileRouter;

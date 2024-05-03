@@ -1,12 +1,8 @@
-import FormHander from '@/components/FormHandler'
-import React from 'react'
+import FormHander from "@/components/FormHandler";
+import React from "react";
 
 const page = () => {
-  return (
-    <div>
-      <FormHander/>
-    </div>
-  )
-}
+  return <div>explore</div>;
+};
 
-export default page
+export default page;

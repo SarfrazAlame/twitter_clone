@@ -1,5 +1,5 @@
 import AppBar from "@/components/AppBar";
-import FormHander from "@/components/FormHandler";
+import FormHandler from "@/components/FormHandler";
 import Sidebar from "@/components/Sidebar";
 import SideNav from "@/components/Sidenav";
 import React from "react";
@@ -12,7 +12,10 @@ export default function DhashboardLayout({
   return (
     <div className="">
       <AppBar />
-      {children}
+      <div className="flex mt-3">
+        {children}
+        <FormHandler/>
+      </div>
     </div>
   );
 }
