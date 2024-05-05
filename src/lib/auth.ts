@@ -3,8 +3,6 @@ import { NextAuthOptions } from 'next-auth'
 import GoogleProvider from 'next-auth/providers/google'
 import prisma from './prisma'
 import { Adapter } from 'next-auth/adapters'
-import { User } from 'lucide-react'
-import { any } from 'zod'
 
 export const authOptions: NextAuthOptions = {
     adapter: PrismaAdapter(prisma) as Adapter,
@@ -36,7 +34,7 @@ export const authOptions: NextAuthOptions = {
         async jwt({ token, user }) {
             const prismaUser = await prisma.user.findFirst({
                 where: {
-                    email: token.email
+                    id: token.id
                 }
             })
             if (!prismaUser) {

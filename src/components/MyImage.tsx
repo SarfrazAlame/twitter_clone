@@ -4,7 +4,6 @@ const MyImage = async () => {
   return (
     <>
       <UserImage />
-
     </>
   );
 };

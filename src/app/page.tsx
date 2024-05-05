@@ -1,6 +1,6 @@
 import { getServerSession } from "next-auth";
 import React from "react";
-import { authOptions } from "./lib/auth";
+import { authOptions } from "../lib/auth";
 import { redirect } from "next/navigation";
 
 const page = async () => {

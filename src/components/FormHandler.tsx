@@ -6,17 +6,10 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 import Image from "next/image";
-import {
-  Form,
-  FormControl,
-  FormDescription,
-  FormField,
-  FormItem,
-  FormLabel,
-} from "./ui/form";
+import { Form, FormControl, FormField, FormItem } from "./ui/form";
 import { Input } from "./ui/input";
-import { Button } from "./ui/button";
 import { CreatePost } from "@/lib/schema";
+import { createPost } from "@/lib/actions";
 
 const FormHandler = () => {
   const form = useForm<z.infer<typeof CreatePost>>({
@@ -32,7 +25,16 @@ const FormHandler = () => {
   return (
     <div className="w-full relative">
       <Form {...form}>
-        <form onSubmit={form.handleSubmit()}>
+        <form
+          onSubmit={form.handleSubmit(async (values) => {
+            const res = await createPost(values);
+            if (res) {
+              return {
+                messaege: "error",
+              };
+            }
+          })}
+        >
           <FormField
             control={form.control}
             name="title"
