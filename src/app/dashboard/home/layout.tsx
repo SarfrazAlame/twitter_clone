@@ -10,11 +10,11 @@ export default function DhashboardLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="">
+    <div className="w-full">
       <AppBar />
-      <div className="flex mt-3">
+      <div className="flex mt-3 w-full">
         {children}
-        <FormHandler/>
+        <FormHandler />
       </div>
     </div>
   );
