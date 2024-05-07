@@ -1,6 +1,6 @@
 import { z } from "zod"
 import { CreatePost } from "./schema"
-import { getUserID } from "./utils"
+import { getUserID } from "./userId"
 import { revalidatePath } from "next/cache"
 import { redirect } from "next/navigation"
 

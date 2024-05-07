@@ -1,4 +1,5 @@
-import { authOptions } from "@/lib/auth";
+import { authOptions, getAuthOptions } from "@/lib/auth";
+import { getUserID } from "@/lib/utils";
 import { getServerSession } from "next-auth";
 import { createUploadthing, type FileRouter } from "uploadthing/next";
 import { UploadThingError } from "uploadthing/server";
@@ -9,19 +10,20 @@ const f = createUploadthing();
 export const ourFileRouter = {
     imageUploader: f({ image: { maxFileSize: "4MB" } })
         .middleware(async ({ req }) => {
-            const session = await getServerSession(authOptions);
+            const session = await getAuthOptions()
+            const user = session?.user
 
-            if (!session?.user) throw new UploadThingError("Unauthorized");
+            if (!user) throw new UploadThingError("Unauthorized");
 
-            return { email: session.user };
+            return { userId: user.id };
         })
         .onUploadComplete(async ({ metadata, file }) => {
-            console.log("Upload complete for userId:", metadata.email);
+            console.log("Upload complete for userId:", metadata.userId);
 
             console.log("file url", file.url);
 
             return {
-                uploadedBy: metadata.email
+                uploadedBy: metadata.userId
             };
         }),
     // you can have video uploder here
