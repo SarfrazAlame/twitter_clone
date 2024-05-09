@@ -4,7 +4,6 @@ import { getServerSession } from "next-auth";
 
 const UserImage = async () => {
   const session = await getServerSession();
-  console.log(session)
   return (
     <div>
       <Image
