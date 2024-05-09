@@ -1,8 +1,10 @@
+'use server'
 import { z } from "zod"
 import { CreatePost } from "./schema"
 import { getUserID } from "./userId"
 import { revalidatePath } from "next/cache"
 import { redirect } from "next/navigation"
+import prisma from "./prisma"
 
 type Post = z.infer<typeof CreatePost>
 
@@ -22,7 +24,7 @@ export const createPost = async (values: Post) => {
     const { title, imgUrl } = validatedFields.data
 
     try {
-        await prisma?.post.create({
+        const posts = await prisma.post.create({
             data: {
                 title,
                 imgUrl,
@@ -33,7 +35,9 @@ export const createPost = async (values: Post) => {
                 }
             }
         })
+
     } catch (error) {
+        console.log(error)
         return {
             message: "databse error: failed to create post"
         }

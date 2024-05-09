@@ -10,6 +10,7 @@ import { Form, FormControl, FormField, FormItem } from "./ui/form";
 import { Input } from "./ui/input";
 import { CreatePost } from "@/lib/schema";
 import { createPost } from "@/lib/actions";
+import { toast } from "sonner";
 
 const FormHandler = () => {
   const form = useForm<z.infer<typeof CreatePost>>({
@@ -29,9 +30,7 @@ const FormHandler = () => {
           onSubmit={form.handleSubmit(async (values) => {
             const res = await createPost(values);
             if (res) {
-              return {
-                messaege: "error",
-              };
+              return toast.error("failed to post");
             }
           })}
         >

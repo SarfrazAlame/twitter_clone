@@ -5,6 +5,7 @@ import AuthProvider from "@/components/AuthProvider";
 import { NextSSRPlugin } from "@uploadthing/react/next-ssr-plugin";
 import { extractRouterConfig } from "uploadthing/server";
 import { ourFileRouter } from "@/app/api/uploadthing/core";
+import { Toaster } from "sonner";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -32,6 +33,7 @@ export default function RootLayout({
             routerConfig={extractRouterConfig(ourFileRouter)}
           />
           <div className="flex justify-start">{children}</div>
+          <Toaster richColors />
         </AuthProvider>
       </body>
     </html>
