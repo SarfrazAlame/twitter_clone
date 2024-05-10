@@ -7,6 +7,8 @@ import { IoNotificationsOutline, IoSearchOutline } from "react-icons/io5";
 import { MdHomeFilled, MdOutlineMessage } from "react-icons/md";
 import UserProfile from "./UserProfile";
 import Dropdown from "./Dropdown";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/lib/auth";
 
 const LogoBar = [
   {
@@ -37,6 +39,8 @@ const LogoBar = [
 ];
 
 const SideNav = async () => {
+  const session = await getServerSession(authOptions);
+  const user = session?.user;
   return (
     <>
       <div className="">
@@ -65,9 +69,7 @@ const SideNav = async () => {
 
           <BsSend className="lg:hidden flex mx-2 bg-blue-500 w-10 h-10 text-white p-2 rounded-full" />
 
-          <div className="mt-20">
-            <UserProfile />
-          </div>
+          <div className="mt-20">{user && <UserProfile user={user} />}</div>
         </div>
       </div>
     </>

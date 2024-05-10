@@ -8,3 +8,4 @@ export type PostWithExtra = Post & {
     likes: LikeWithExtra[],
     user: User
 }
+

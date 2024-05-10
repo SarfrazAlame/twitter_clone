@@ -46,3 +46,12 @@ export const createPost = async (values: Post) => {
     redirect('/dashboard/home')
 }
 
+
+export const CommentPost = async() =>{
+    
+    try {
+        
+    } catch (error) {
+        
+    }
+}
