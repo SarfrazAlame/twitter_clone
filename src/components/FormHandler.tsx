@@ -32,6 +32,7 @@ const FormHandler = () => {
             if (res) {
               return toast.error("failed to post");
             }
+            toast.success("Post Sent");
           })}
         >
           <FormField
@@ -52,7 +53,7 @@ const FormHandler = () => {
             )}
           />
           {!!imgUrl ? (
-            <div className="h-96 md:h-[450px] overflow-hidden rounded-md">
+            <div className="lg:w-2/3">
               <AspectRatio ratio={1 / 1} className="relative h-full">
                 <Image
                   src={imgUrl}

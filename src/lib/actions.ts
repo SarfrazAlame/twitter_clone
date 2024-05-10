@@ -28,7 +28,7 @@ export const createPost = async (values: Post) => {
             data: {
                 title,
                 imgUrl,
-                User: {
+                user: {
                     connect: {
                         id: userId
                     }
@@ -45,3 +45,4 @@ export const createPost = async (values: Post) => {
     revalidatePath("/dashboard/home")
     redirect('/dashboard/home')
 }
+
