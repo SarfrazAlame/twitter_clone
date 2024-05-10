@@ -89,6 +89,7 @@ const FormHandler = () => {
           )}
           <button
             type="submit"
+            disabled={form.formState.isSubmitting}
             className="absolute right-0 top-24 border px-6 py-2 rounded-full bg-blue-500 text-white"
           >
             Post
