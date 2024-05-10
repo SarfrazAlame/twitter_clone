@@ -85,17 +85,24 @@ model Post {
   updatedAt DateTime @updatedAt
   likes     Like[]
 
-  user    User      @relation(fields: [userId], references: [id])
-  userId  String
+  user     User      @relation(fields: [userId], references: [id])
+  userId   String
   comments Comment[]
 }
 
 model Like {
-  id     String @id @default(uuid())
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  Post   Post   @relation(fields: [postId], references: [id])
+  postId String
+
   user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId String
-  Post   Post?  @relation(fields: [postId], references: [id])
-  postId String
+
+  @@unique([postId, userId])
+  @@index([userId])
 }
 
 model Comment {

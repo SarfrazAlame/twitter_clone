@@ -47,11 +47,34 @@ export const createPost = async (values: Post) => {
 }
 
 
-export const CommentPost = async() =>{
-    
+export const deletePost = async (id: string) => {
+
     try {
-        
+        await prisma.post.delete({
+            where: {
+                id: id
+            }
+        })
     } catch (error) {
-        
+        console.log(error)
+        return {
+            message: "failed to delete"
+        }
+    }
+    revalidatePath('/dashboard/home')
+    redirect('/dashboard/home')
+}
+
+
+export const likesPost = async (id: string) => {
+    try {
+        await prisma.like.create({
+            data: {
+                postId,
+                userId
+            }
+        })
+    } catch (error) {
+
     }
 }

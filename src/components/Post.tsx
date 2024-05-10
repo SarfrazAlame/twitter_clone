@@ -1,18 +1,19 @@
 import { PostWithExtra } from "@/lib/alltypes";
 import Image from "next/image";
-import UserImage from "./UserImage";
 import Comments from "./Comments";
 import PostUser from "./PostUser";
+import DeletePost from "./DeletePost";
 
 const Post = async ({ post }: { post: PostWithExtra }) => {
   return (
     <>
       {post.title || post.imgUrl ? (
-        <div className="pb-3 mx-10 my-6 border-b">
+        <div className="w-full pb-3 mx-10 my-6 border-b">
           <div className="my-2">
-            <div className="">
+            <div className="w-full flex justify-between">
               <PostUser post={post} />
-            </div>  
+              <DeletePost post={post} />
+            </div>
             <div className="mx-12 -mt-3">
               <p className="mb-2">{post.title}</p>
               {post.imgUrl ? (
