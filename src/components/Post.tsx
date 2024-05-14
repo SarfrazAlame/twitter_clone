@@ -5,6 +5,7 @@ import PostUser from "./PostUser";
 import DeletePost from "./DeletePost";
 
 const Post = async ({ post }: { post: PostWithExtra }) => {
+
   return (
     <>
       {post.title || post.imgUrl ? (

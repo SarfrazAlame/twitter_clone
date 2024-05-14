@@ -67,14 +67,39 @@ export const deletePost = async (id: string) => {
 
 
 export const likesPost = async (id: string) => {
+    const userId = await getUserID()
+    const like = await prisma.like.findUnique({
+        where: {
+            postId_userId: {
+                userId,
+                postId: id
+            }
+        }
+    })
+
+    if (like) {
+        await prisma.like.delete({
+            where: {
+                postId_userId: {
+                    postId: id,
+                    userId: userId
+                }
+            }
+        })
+        revalidatePath("/dashboard/home")
+        return { message: "Unliked Post" }
+    }
+
     try {
         await prisma.like.create({
             data: {
-                postId,
-                userId
+                postId: id,
+                userId: userId
             }
         })
+        revalidatePath('/dashboard/home')
+        return { message: "liked post" }
     } catch (error) {
-
+        return { message: "Database Error: Failed to like post" }
     }
 }
