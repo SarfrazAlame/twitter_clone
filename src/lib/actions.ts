@@ -5,6 +5,7 @@ import { getUserID } from "./userId"
 import { revalidatePath } from "next/cache"
 import { redirect } from "next/navigation"
 import prisma from "./prisma"
+import { connect } from "http2"
 
 type Post = z.infer<typeof CreatePost>
 
@@ -101,5 +102,29 @@ export const likesPost = async (id: string) => {
         return { message: "liked post" }
     } catch (error) {
         return { message: "Database Error: Failed to like post" }
+    }
+}
+
+
+export const commentPost = async (comment: string, postId: string) => {
+    const userId = await getUserID()
+
+    try {
+        await prisma.comment.create({
+            data: {
+                body: comment,
+                postId,
+                userId
+            }
+        })
+        revalidatePath("/dashboard/home")
+        return {
+            message:"Comment Created"
+        }
+    } catch (error) {
+        console.log(error)
+        return {
+            message:"failed to create post"
+        }
     }
 }

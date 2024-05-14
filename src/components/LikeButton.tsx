@@ -2,10 +2,8 @@
 
 import { likesPost } from "@/lib/actions";
 import { PostWithExtra } from "@/lib/alltypes";
-import { fetchPosts } from "@/lib/fetch";
 import { Heart } from "lucide-react";
 import React from "react";
-import { CiHeart } from "react-icons/ci";
 
 const LikeButton = ({ post }: { post: PostWithExtra }) => {
   const likes = post.likes;

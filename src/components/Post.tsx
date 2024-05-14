@@ -4,7 +4,7 @@ import Comments from "./Comments";
 import PostUser from "./PostUser";
 import DeletePost from "./DeletePost";
 
-const Post = async ({ post }: { post: PostWithExtra }) => {
+const Post = ({ post }: { post: PostWithExtra }) => {
 
   return (
     <>
