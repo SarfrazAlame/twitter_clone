@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import {
   Dialog,
@@ -10,14 +9,17 @@ import { FaRegComment } from "react-icons/fa6";
 import PostUser from "./PostUser";
 import { PostWithExtra } from "@/lib/alltypes";
 import UserImage from "./UserImage";
+import Inputs from "./Inputs";
 
 const Comment = ({ post }: { post: PostWithExtra }) => {
-  const [comment, setComment] = useState("");
   return (
     <div>
       <Dialog>
         <DialogTrigger>
-          <FaRegComment className="text-gray-600 cursor-pointer hover:text-blue-500" />
+          <div className="flex gap-2">
+            <FaRegComment className="text-gray-600 cursor-pointer hover:text-blue-500" />
+            <p className="-mt-1">{post.comments.length}</p>
+          </div>
         </DialogTrigger>
         <DialogContent>
           <DialogHeader>
@@ -34,18 +36,8 @@ const Comment = ({ post }: { post: PostWithExtra }) => {
                 </p>
                 <div className="flex mt-10">
                   <UserImage />
-                  <input
-                    className="outline-none mx-3"
-                    placeholder="Post your reply"
-                    name="comment"
-                    value={comment}
-                  />
+                  <Inputs post={post} />
                 </div>
-              </div>
-              <div className="w-full flex justify-end">
-                <button className="bg-blue-500 px-4 py-2 rounded-full text-white">
-                  Reply
-                </button>
               </div>
             </div>
           </DialogHeader>

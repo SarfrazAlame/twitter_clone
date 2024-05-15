@@ -119,12 +119,12 @@ export const commentPost = async (comment: string, postId: string) => {
         })
         revalidatePath("/dashboard/home")
         return {
-            message:"Comment Created"
+            message: "Comment Created"
         }
     } catch (error) {
         console.log(error)
         return {
-            message:"failed to create post"
+            message: "failed to create post"
         }
     }
 }
