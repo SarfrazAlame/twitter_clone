@@ -49,13 +49,20 @@ export const createPost = async (values: Post) => {
 
 
 export const deletePost = async (id: string) => {
-
+    const userId = await getUserID()
     try {
-        await prisma.post.delete({
+        await prisma.like.deleteMany({
             where: {
-                id: id
+                id
             }
         })
+        await prisma.post.delete({
+            where: {
+                id: id,
+                userId: userId
+            }
+        })
+        revalidatePath('/dashboard/home')
     } catch (error) {
         console.log(error)
         return {

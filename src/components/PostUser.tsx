@@ -6,7 +6,7 @@ import UserImage from "./UserImage";
 const PostUser = ({ post }: { post: PostWithExtra }) => {
   return (
     <>
-      <div className="flex gap-3">
+      <div className="flex gap-3 cursor-pointer">
         <Image
           src={post.user.image}
           alt="image"
