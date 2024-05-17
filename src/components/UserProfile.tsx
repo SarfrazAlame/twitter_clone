@@ -1,3 +1,4 @@
+import { fetchUsers } from "@/lib/fetch";
 import Image from "next/image";
 import React from "react";
 
@@ -21,7 +22,7 @@ const UserProfile = async ({ user }: { user: UserProps }) => {
           className="rounded-full"
         />
       </div>
-      <div className="flex flex-col">
+      <div className="hidden lg:flex flex-col">
         <p className="text-xl font-bold">{user.name}</p>
         <p className="">{user.email}</p>
       </div>

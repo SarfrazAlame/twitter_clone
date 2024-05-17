@@ -36,12 +36,12 @@ const page = async () => {
             <p>{user?.email}</p>
           </div>
           <div className="mt-7 flex">
-            {/* <p className="hover:underline cursor-pointer">
-              {user?.following.length} following
-            </p> */}
-            {/* <p className="hover:underline cursor-pointer">
-              {user?.follower.length} following
-            </p>  */}
+            <p className="hover:underline cursor-pointer">
+              {/* {user?.following.length} following */}
+            </p>
+            <p className="hover:underline cursor-pointer">
+              {/* {user?.follower.length} following */}
+            </p>
           </div>
         </div>
         <button className="border h-fit px-3 py-1 rounded-full font-semibold hover:bg-gray-200">

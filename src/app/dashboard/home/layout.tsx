@@ -13,7 +13,7 @@ export default function DhashboardLayout({
   return (
     <div className="w-full">
       <AppBar />
-      <div className="flex mt-3 w-full">
+      <div className="flex mt-3">
         {children}
         <FormHandler />
       </div>

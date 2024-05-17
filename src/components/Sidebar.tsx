@@ -9,7 +9,10 @@ const Sidebar = async () => {
       <div className="text-xl font-semibold m-3">Who to follow</div>
       <div className="my-7">
         {users.users?.map((user) => (
-          <div key={user.id} className="flex justify-between gap-2 hover:bg-gray-100 cursor-pointer rounded">
+          <div
+            key={user.id}
+            className="flex justify-between gap-2 hover:bg-gray-100 cursor-pointer rounded"
+          >
             <div className="flex gap-2 my-2 px-2 py-2 ">
               <div>
                 <Image

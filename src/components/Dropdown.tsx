@@ -19,7 +19,7 @@ const Dropdown = () => {
           <DropdownMenuTrigger>
             <div className="flex gap-3">
               <CgMoreO className="text-3xl" />
-              <p>More</p>
+              <p className="hidden lg:flex">More</p>
             </div>
           </DropdownMenuTrigger>
           <DropdownMenuContent>

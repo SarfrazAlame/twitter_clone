@@ -23,14 +23,13 @@ const FormHandler = () => {
 
   const imgUrl = form.watch("imgUrl");
 
-
   return (
     <div className="w-full relative">
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(async (values) => {
             const res = await createPost(values);
-            form.reset()
+            form.reset();
             if (res) {
               return toast.error("failed to post");
             }
@@ -44,7 +43,7 @@ const FormHandler = () => {
               <FormItem>
                 <FormControl>
                   <Input
-                    className="h-20 mb-5 border-none bg-gray-100 placeholder:text-xl"
+                    className="h-12 md:h-20 mb-5 border-none bg-gray-100 lg:placeholder:text-xl"
                     type="caption"
                     id="caption"
                     placeholder="What is happening?!"

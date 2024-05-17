@@ -41,10 +41,9 @@ const LogoBar = [
 const SideNav = async () => {
   const session = await getServerSession(authOptions);
   const user = session?.user;
-  console.log(user)
   return (
     <>
-      <div className="">
+      <div className="hidden sm:flex">
         <div className="flex flex-col gap-5 mt-2">
           <Link href={"/"} className="mx-3">
             <FaXTwitter className="text-4xl cursor-pointer" />
@@ -71,6 +70,19 @@ const SideNav = async () => {
           <BsSend className="lg:hidden flex mx-2 bg-blue-500 w-10 h-10 text-white p-2 rounded-full" />
 
           <div className="mt-20">{user && <UserProfile user={user} />}</div>
+        </div>
+      </div>
+
+      <div className="sm:hidden w-full flex gap-2 h-24">
+        <div className="absolute w-full h-16 flex justify-around">
+          {LogoBar.map((item) => {
+            const IconItem = item.icon;
+            return (
+              <Link href={item.href} key={item.name} className="">
+                <IconItem className="h-6 w-6" />
+              </Link>
+            );
+          })}
         </div>
       </div>
     </>

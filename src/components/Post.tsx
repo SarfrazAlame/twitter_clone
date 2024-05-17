@@ -9,9 +9,9 @@ const Post = ({ post }: { post: PostWithExtra }) => {
   return (
     <>
       {post.title || post.imgUrl ? (
-        <div className="w-full pb-3 mx-10 my-6 border-b">
+        <div className="w-full pb-3 mx-3 md:mx-10 my-6 border-b">
           <div className="my-2">
-            <div className="w-full flex justify-between">
+            <div className="w-5/4 lg:w-full flex justify-between">
               <PostUser post={post} />
               <DeletePost post={post} />
             </div>
