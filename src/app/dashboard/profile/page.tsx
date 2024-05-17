@@ -20,7 +20,6 @@ const page = async () => {
       <p className="w-1/3 text-center text-sm -mt-1 ">
         {user?.posts.length} posts
       </p>
-
       <div className="w-2/3 flex justify-between mt-16 mx-12">
         <div>
           <Image

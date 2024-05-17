@@ -43,8 +43,11 @@ export const fetchUsers = async () => {
                 id: userId
             },
             include: {
-                posts: true,
-                
+                posts: {
+                    include: {
+                        user: true
+                    }
+                },
             }
         })
         return user
@@ -52,6 +55,51 @@ export const fetchUsers = async () => {
         console.log(error)
         return {
             message: "failed to get User"
+        }
+    }
+}
+
+export const fetchUser = async () => {
+    try {
+        const users = await prisma.user.findMany({})
+        return {users}
+    } catch (error) {
+        console.log(error)
+        return {
+            error: "failed to get user"
+        }
+    }
+}
+
+export const fetchPostById = async (id: string) => {
+    noStore()
+    try {
+        const posts = await prisma.post.findUnique({
+            where: {
+                id
+            },
+            include: {
+                comments: {
+                    include: {
+                        user: true
+                    },
+                    orderBy: {
+                        createdAt: "desc"
+                    }
+                },
+                likes: {
+                    include: {
+                        user: true
+                    }
+                },
+                user: true
+            }
+        })
+        return posts
+    } catch (error) {
+        console.log(error)
+        return {
+            message: "failed to fetch post"
         }
     }
 }

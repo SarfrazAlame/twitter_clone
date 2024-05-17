@@ -41,6 +41,7 @@ const LogoBar = [
 const SideNav = async () => {
   const session = await getServerSession(authOptions);
   const user = session?.user;
+  console.log(user)
   return (
     <>
       <div className="">

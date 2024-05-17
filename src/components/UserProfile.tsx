@@ -1,6 +1,3 @@
-import { authOptions } from "@/lib/auth";
-import { User } from "@prisma/client";
-import { getServerSession } from "next-auth";
 import Image from "next/image";
 import React from "react";
 

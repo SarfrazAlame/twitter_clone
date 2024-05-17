@@ -14,7 +14,7 @@ const LikeButton = ({ post }: { post: PostWithExtra }) => {
           onClick={() => likesPost(post.id)}
           className={
             likes.length > 0
-              ? "cursor-pointer text-xl hover:text-red-600 fill-red-600 border-none"
+              ? "cursor-pointer text-xl text-red-600  fill-red-600 border-none"
               : "cursor-pointer text-xl hover:text-red-600"
           }
         />

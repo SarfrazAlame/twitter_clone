@@ -23,12 +23,14 @@ const FormHandler = () => {
 
   const imgUrl = form.watch("imgUrl");
 
+
   return (
     <div className="w-full relative">
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(async (values) => {
             const res = await createPost(values);
+            form.reset()
             if (res) {
               return toast.error("failed to post");
             }
