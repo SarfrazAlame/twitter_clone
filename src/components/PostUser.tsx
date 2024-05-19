@@ -2,6 +2,7 @@ import { PostWithExtra } from "@/lib/alltypes";
 import Image from "next/image";
 import React from "react";
 import UserImage from "./UserImage";
+import Timestamp from "./Timestamp";
 
 const PostUser = ({ post }: { post: PostWithExtra }) => {
   return (
@@ -14,7 +15,11 @@ const PostUser = ({ post }: { post: PostWithExtra }) => {
           width={40}
           className="rounded-full"
         />
-        <p className="text-md font-bold text-gray-800">{post.user.name}</p>
+        <div className="flex gap-2">
+          <p className="text-md font-bold text-gray-800">{post.user.name}</p>
+          <span>.</span>
+          <Timestamp createAt={post.createdAt} className="" />
+        </div>
       </div>
     </>
   );
