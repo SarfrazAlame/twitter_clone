@@ -1,14 +1,17 @@
+import { followUser } from "@/lib/actions";
 import { fetchUser } from "@/lib/fetch";
 import Image from "next/image";
 import React from "react";
+import Button from "./Button";
 
 const Sidebar = async () => {
   const users = await fetchUser();
+
   return (
     <div className="w-full text-center">
       <div className="text-xl font-semibold m-3">Who to follow</div>
       <div className="my-7">
-        {users.users?.map((user) => (
+        {users.map((user:any) => (
           <div
             key={user.id}
             className="flex justify-between gap-2 hover:bg-gray-100 cursor-pointer rounded"
@@ -28,9 +31,7 @@ const Sidebar = async () => {
                 <p>{user.email}</p>
               </div>
             </div>
-            <button className="text-end border h-fit mt-7 px-4 py-1 bg-black text-white rounded-full">
-              Follow
-            </button>
+            <Button user={user} />
           </div>
         ))}
       </div>

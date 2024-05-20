@@ -1,5 +1,4 @@
-import ProfileUser from "@/components/ProfileUser";
-import { fetchPosts, fetchUsers } from "@/lib/fetch";
+import { fetchUsers } from "@/lib/fetch";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
@@ -35,12 +34,12 @@ const page = async () => {
             </p>
             <p>{user?.email}</p>
           </div>
-          <div className="mt-7 flex">
+          <div className="mt-7 flex gap-5">
             <p className="hover:underline cursor-pointer">
-              {/* {user?.following.length} following */}
+              {user?.following.length} following
             </p>
             <p className="hover:underline cursor-pointer">
-              {/* {user?.follower.length} following */}
+              {user?.followers.length} following
             </p>
           </div>
         </div>

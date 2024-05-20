@@ -48,6 +48,13 @@ export const fetchUsers = async () => {
                         user: true
                     }
                 },
+                likes: {
+                    include: {
+                        user: true
+                    }
+                },
+                followers: true,
+                following: true
             }
         })
         return user
@@ -62,7 +69,7 @@ export const fetchUsers = async () => {
 export const fetchUser = async () => {
     try {
         const users = await prisma.user.findMany({})
-        return {users}
+        return users
     } catch (error) {
         console.log(error)
         return {

@@ -135,3 +135,23 @@ export const commentPost = async (comment: string, postId: string) => {
         }
     }
 }
+
+
+export const followUser = async (id: string) => {
+    const userId = await getUserID()
+
+    try {
+        await prisma.follows.create({
+            data: {
+                followerId: userId,
+                followingId: id
+            }
+        })
+        revalidatePath("/dashboard/home")
+    } catch (error) {
+        console.log(error)
+        return {
+            message: "Failed to follow"
+        }
+    }
+}
