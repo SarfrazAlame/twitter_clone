@@ -3,15 +3,16 @@ import { fetchUser } from "@/lib/fetch";
 import Image from "next/image";
 import React from "react";
 import Button from "./Button";
+import { User } from "@prisma/client";
 
 const Sidebar = async () => {
-  const users = await fetchUser();
+  const users: any = await fetchUser();
 
   return (
     <div className="w-full text-center">
       <div className="text-xl font-semibold m-3">Who to follow</div>
       <div className="my-7">
-        {users.map((user:any) => (
+        {users.map((user: any) => (
           <div
             key={user.id}
             className="flex justify-between gap-2 hover:bg-gray-100 cursor-pointer rounded"

@@ -14,7 +14,7 @@ const UserProfile = async ({ user }: { user: UserProps }) => {
     <div className="">
       <div className="flex gap-3">
         <Image
-          src={user?.image}
+          src={user?.image || ""}
           alt="image"
           width={40}
           height={40}
