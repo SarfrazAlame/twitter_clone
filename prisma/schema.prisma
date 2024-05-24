@@ -61,10 +61,12 @@ model User {
   posts         Post[]
   likes         Like[]
   comments      Comment[]
-  Account       Account[]
-  Session       Session[]
   followers     Follows[] @relation("following")
   following     Follows[] @relation("follower")
+  accounts       Account[]
+  sessions       Session[]
+
+  @@map(name:"users")
 }
 
 model Follows {
