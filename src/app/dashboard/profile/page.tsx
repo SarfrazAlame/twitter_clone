@@ -5,7 +5,7 @@ import React from "react";
 import { FaArrowLeftLong } from "react-icons/fa6";
 
 const page = async () => {
-  const user = await fetchUsers();
+  const user: any = await fetchUsers();
   return (
     <div className="w-full">
       <div className="flex h-8 items-center w-1/3 justify-center gap-10">

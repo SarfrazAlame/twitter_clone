@@ -1,9 +1,7 @@
-import { followUser } from "@/lib/actions";
 import { fetchUser } from "@/lib/fetch";
 import Image from "next/image";
 import React from "react";
 import Button from "./Button";
-import { User } from "@prisma/client";
 
 const Sidebar = async () => {
   const users: any = await fetchUser();

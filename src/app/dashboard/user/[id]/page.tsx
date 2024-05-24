@@ -1,6 +1,7 @@
 import Comment from "@/components/Comment";
 import Comments from "@/components/Comments";
 import { fetchPostById } from "@/lib/fetch";
+import { User } from "@prisma/client";
 import { Bookmark, Heart } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -8,9 +9,10 @@ import React from "react";
 import { BiRepost } from "react-icons/bi";
 import { FaArrowLeftLong, FaRegComment } from "react-icons/fa6";
 import { GoShare } from "react-icons/go";
+ 
 
 const page = async ({ params: { id } }: { params: { id: string } }) => {
-  const posts = await fetchPostById(id);
+  const posts:any  = await fetchPostById(id);
   return (
     <div className="w-full">
       <div className="flex mx-12 gap-7 h-7 items-center">

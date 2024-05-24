@@ -1,6 +1,4 @@
-import { authOptions, getAuthOptions } from "@/lib/auth";
-import { getUserID } from "@/lib/utils";
-import { getServerSession } from "next-auth";
+import {  getAuthOptions } from "@/lib/auth";
 import { createUploadthing, type FileRouter } from "uploadthing/next";
 import { UploadThingError } from "uploadthing/server";
 

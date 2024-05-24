@@ -7,8 +7,8 @@ const UserImage = async () => {
   return (
     <div>
       <Image
-        src={session?.user.image}
-        alt={session?.user.name}
+        src={session?.user.image || ""}
+        alt={session?.user.name || ""}
         width={40}
         height={40}
         className="rounded-full"

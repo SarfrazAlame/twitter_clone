@@ -9,7 +9,7 @@ const PostUser = ({ post }: { post: PostWithExtra }) => {
     <>
       <div className="flex gap-3 cursor-pointer">
         <Image
-          src={post.user.image}
+          src={post.user.image || ""}
           alt="image"
           height={40}
           width={40}
