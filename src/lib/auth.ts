@@ -20,7 +20,6 @@ export const authOptions: NextAuthOptions = {
     session: {
         strategy: "jwt"
     },
-    debug: true,
     callbacks: {
         async session({ session, token }) {
             if (token) {
@@ -34,7 +33,7 @@ export const authOptions: NextAuthOptions = {
         async jwt({ token, user }) {
             const prismaUser = await prisma.user.findFirst({
                 where: {
-                    id: token.id
+                    email: token.email
                 }
             })
             if (!prismaUser) {
@@ -61,4 +60,4 @@ export const authOptions: NextAuthOptions = {
     },
 }
 
-export const getAuthOptions = () => getServerSession(authOptions)
+export const getAuthOptions =  () => getServerSession(authOptions)

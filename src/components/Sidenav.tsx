@@ -8,7 +8,7 @@ import { MdHomeFilled, MdOutlineMessage } from "react-icons/md";
 import UserProfile from "./UserProfile";
 import Dropdown from "./Dropdown";
 import { getServerSession } from "next-auth";
-import { authOptions } from "@/lib/auth";
+import { authOptions, getAuthOptions } from "@/lib/auth";
 
 const LogoBar = [
   {
@@ -39,7 +39,7 @@ const LogoBar = [
 ];
 
 const SideNav = async () => {
-  const session = await getServerSession(authOptions);
+  const session = await getAuthOptions();
   const user = session?.user;
   return (
     <>

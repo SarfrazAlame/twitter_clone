@@ -4,7 +4,7 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-  url = env("DATABASE_URL") 
+  url      = env("DATABASE_URL")
 }
 
 model VerificationToken {
@@ -62,10 +62,10 @@ model User {
   comments      Comment[]
   followers     Follows[] @relation("following")
   following     Follows[] @relation("follower")
-  accounts       Account[]
-  sessions       Session[]
+  accounts      Account[]
+  sessions      Session[]
 
-  @@map(name:"users")
+  @@map(name: "users")
 }
 
 model Follows {
@@ -74,7 +74,9 @@ model Follows {
   following   User   @relation("following", fields: [followingId], references: [id])
   followingId String
 
-  @@id([followerId, followingId]) 
+  @@id([followerId, followingId])
+  @@index([followerId])
+  @@index([followingId])
 }
 
 model Post {
@@ -88,6 +90,8 @@ model Post {
   user     User      @relation(fields: [userId], references: [id])
   userId   String
   comments Comment[]
+
+  @@index([userId])
 }
 
 model Like {
