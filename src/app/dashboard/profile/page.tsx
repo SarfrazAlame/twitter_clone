@@ -7,7 +7,7 @@ import { FaArrowLeftLong } from "react-icons/fa6";
 const page = async () => {
   const user: any = await fetchUsers();
   return (
-    <div className="w-full">
+    <>
       <div className="flex h-8 items-center w-1/3 justify-center gap-10">
         <Link href={"/dashboard/home"}>
           <FaArrowLeftLong className="cursor-pointer w-9 h-9 px-2 hover:bg-gray-100 rounded-full" />
@@ -47,7 +47,7 @@ const page = async () => {
           Edit profile
         </button>
       </div>
-    </div>
+    </>
   );
 };
 export default page;
