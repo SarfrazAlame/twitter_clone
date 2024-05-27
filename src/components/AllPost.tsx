@@ -25,12 +25,9 @@ const AllPost = () => {
     <div className="flex mt-12 w-full gap-10 justify-evenly">
       {data.map((data) => (
         <div key={data.href}>
-          <Link
-            href={data.href}
-            className="text-md text-gray-600 font-bold hover:bg-gray-200 px-7 py-4"
-          >
+          <button className="text-md text-gray-600 font-bold hover:bg-gray-200 px-7 py-4">
             {data.name}
-          </Link>
+          </button>
         </div>
       ))}
     </div>
