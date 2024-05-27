@@ -39,7 +39,7 @@ const page = async () => {
               {user?.following.length} following
             </p>
             <p className="hover:underline cursor-pointer">
-              {user?.followers.length} following
+              {user?.followers.length} followers
             </p>
           </div>
         </div>
