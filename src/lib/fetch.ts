@@ -111,3 +111,35 @@ export const fetchPostById = async (id: string) => {
         }
     }
 }
+
+
+export const fetchUserById = async (id: string) => {
+    noStore()
+    try {
+        const user = await prisma.user.findUnique({
+            where: {
+                id
+            },
+            include: {
+                posts: {
+                    include: {
+                        user: true
+                    }
+                },
+                likes: {
+                    include: {
+                        user: true
+                    }
+                },
+                followers: true,
+                following: true
+            }
+        })
+        return user
+    } catch (error) {
+        console.log(error)
+        return {
+            message:"errror while fetching user"
+        }
+    }
+}

@@ -12,7 +12,9 @@ const Post = ({ post }: { post: PostWithExtra }) => {
         <div className="w-full pb-3 mx-3 md:mx-10 my-6 border-b">
           <div className="my-2">
             <div className="w-5/4 lg:w-full flex justify-between">
-              <PostUser post={post} />
+              <Link href={`/dashboard/${post.user.id}`}>
+                <PostUser post={post} />
+              </Link>
               <DeletePost post={post} />
             </div>
             <Link href={`/dashboard/user/${post.id}`}>

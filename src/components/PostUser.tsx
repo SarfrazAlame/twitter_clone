@@ -7,7 +7,6 @@ import Link from "next/link";
 const PostUser = ({ post }: { post: PostWithExtra }) => {
   return (
     <>
-      <Link href={`/dashboard/${post.id}}`}>
         <div className="flex gap-3 cursor-pointer">
           <Image
             src={post.user.image || ""}
@@ -22,7 +21,6 @@ const PostUser = ({ post }: { post: PostWithExtra }) => {
             <Timestamp createAt={post.createdAt} className="" />
           </div>
         </div>
-      </Link>
     </>
   );
 };
