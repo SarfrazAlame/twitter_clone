@@ -1,14 +1,13 @@
 import { PostWithExtra } from "@/lib/alltypes";
 import Image from "next/image";
 import React from "react";
-import UserImage from "./UserImage";
 import Timestamp from "./Timestamp";
 import Link from "next/link";
 
 const PostUser = ({ post }: { post: PostWithExtra }) => {
   return (
     <>
-      <Link href={`/dashboard/home/profile}`}>
+      <Link href={`/dashboard/${post.id}}`}>
         <div className="flex gap-3 cursor-pointer">
           <Image
             src={post.user.image || ""}

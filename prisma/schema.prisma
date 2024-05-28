@@ -17,7 +17,7 @@ model VerificationToken {
 }
 
 model Account {
-  id                 String  @id @default(uuid())
+  id                 String  @id @default(cuid())
   userId             String
   type               String
   provider           String
@@ -38,7 +38,7 @@ model Account {
 }
 
 model Session {
-  id           String   @id @default(uuid())
+  id           String   @id @default(cuid())
   sessionToken String   @unique
   expires      DateTime
   user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
@@ -48,7 +48,7 @@ model Session {
 }
 
 model User {
-  id            String    @id @default(uuid())
+  id            String    @id @default(cuid())
   username      String?
   name          String?
   email         String?   @unique
@@ -80,7 +80,7 @@ model Follows {
 }
 
 model Post {
-  id        String   @id @default(uuid())
+  id        String   @id @default(cuid())
   title     String?
   imgUrl    String?
   createdAt DateTime @default(now())
@@ -95,7 +95,7 @@ model Post {
 }
 
 model Like {
-  id        String   @id @default(uuid())
+  id        String   @id @default(cuid())
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
@@ -110,7 +110,7 @@ model Like {
 }
 
 model Comment {
-  id        String   @id @default(uuid())
+  id        String   @id @default(cuid())
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   body      String?

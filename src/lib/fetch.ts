@@ -67,9 +67,10 @@ export const fetchUsers = async () => {
 }
 
 export const fetchUser = async () => {
+    const userId = await getUserID()
     try {
         const users = await prisma.user.findMany({})
-        return users
+        return users.filter((user) => user.id !== userId)
     } catch (error) {
         console.log(error)
         return {
