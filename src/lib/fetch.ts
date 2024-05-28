@@ -146,3 +146,32 @@ export const fetchUserById = async (id: string) => {
         }
     }
 }
+
+export const fetchCommentWithPostId = async (id: string) => {
+    try {
+        const comments = await prisma.post.findFirst({
+            include: {
+                user: true,
+                comments: {
+                    include: {
+                        user: {
+                            select: {
+                                username: true
+                            }
+                        }
+                    }
+                },
+                likes: {
+                    include: {
+                        user: true
+                    }
+                }
+            }
+        })
+        return comments
+    } catch (error) {
+        return {
+            message: "Error failed to fetch comments"
+        }
+    }
+}

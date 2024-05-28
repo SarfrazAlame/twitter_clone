@@ -155,3 +155,4 @@ export const followUser = async (id: string) => {
         }
     }
 }
+

@@ -68,11 +68,11 @@ const page = async ({ params: { id } }: { params: { id: string } }) => {
       </div>
 
       <div>
-        <PostReply user={user} postId={posts.id}/>
+        <PostReply user={user} postId={posts.id} />
       </div>
 
       <div>
-        <ShowComments posts={posts}/>
+        <ShowComments postId={posts.id} />
       </div>
     </div>
   );
