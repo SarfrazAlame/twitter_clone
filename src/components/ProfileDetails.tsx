@@ -1,9 +1,9 @@
-import { PostWithExtra, UserWithExtra } from "@/lib/alltypes";
-import { Post, User } from "@prisma/client";
+import { UserWithExtra } from "@/lib/alltypes";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import { FaArrowLeftLong } from "react-icons/fa6";
+import AllPost from "./AllPost";
 
 const ProfileDetails = ({ user }: { user: UserWithExtra }) => {
   return (
@@ -46,6 +46,10 @@ const ProfileDetails = ({ user }: { user: UserWithExtra }) => {
         <button className="border h-fit px-3 py-1 rounded-full font-semibold hover:bg-gray-200">
           Edit profile
         </button>
+      </div>
+
+      <div>
+        <AllPost />
       </div>
     </>
   );

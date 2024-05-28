@@ -9,7 +9,6 @@ export default function DhashboardLayout({
   return (
     <div className="w-full">
       {children}
-      <AllPost />
     </div>
   );
 }

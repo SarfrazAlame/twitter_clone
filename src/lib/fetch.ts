@@ -82,7 +82,7 @@ export const fetchUser = async () => {
 export const fetchPostById = async (id: string) => {
     noStore()
     try {
-        const posts = await prisma.post.findUnique({
+        const posts = await prisma.post.findFirst({
             where: {
                 id
             },
@@ -98,9 +98,12 @@ export const fetchPostById = async (id: string) => {
                 likes: {
                     include: {
                         user: true
-                    }
+                    },
                 },
-                user: true
+                user: true,
+            },
+            orderBy: {
+                createdAt: "desc"
             }
         })
         return posts
@@ -139,7 +142,7 @@ export const fetchUserById = async (id: string) => {
     } catch (error) {
         console.log(error)
         return {
-            message:"errror while fetching user"
+            message: "errror while fetching user"
         }
     }
 }

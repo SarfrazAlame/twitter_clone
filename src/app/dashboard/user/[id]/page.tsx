@@ -1,15 +1,22 @@
+import Comments from "@/components/Comments";
+import PostReply from "@/components/PostReply";
 import ProfileDetails from "@/components/ProfileDetails";
+import ShowComments from "@/components/ShowComments";
+import Timestamp from "@/components/Timestamp";
+import { getAuthOptions } from "@/lib/auth";
 import { fetchPostById } from "@/lib/fetch";
 import { Bookmark, Heart } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
+import React, { use } from "react";
 import { BiRepost } from "react-icons/bi";
 import { FaArrowLeftLong, FaRegComment } from "react-icons/fa6";
 import { GoShare } from "react-icons/go";
 
 const page = async ({ params: { id } }: { params: { id: string } }) => {
   const posts: any = await fetchPostById(id);
+  const session = await getAuthOptions();
+  const user = session?.user;
   return (
     <div className="w-full">
       <div className="flex mx-12 gap-7 h-7 items-center">
@@ -33,6 +40,10 @@ const page = async ({ params: { id } }: { params: { id: string } }) => {
             </div>
             <p className="mt-3">{posts?.title}</p>
 
+            <div>
+              <Timestamp createAt={posts?.createAt} className="" />
+            </div>
+
             <div className="flex w-full justify-between my-4 border-t py-3">
               <div className="flex gap-2">
                 <FaRegComment className="cursor-pointer rounded-full  hover:text-blue-400" />
@@ -54,6 +65,14 @@ const page = async ({ params: { id } }: { params: { id: string } }) => {
             </div>
           </div>
         }
+      </div>
+
+      <div>
+        <PostReply user={user} postId={posts.id}/>
+      </div>
+
+      <div>
+        <ShowComments posts={posts}/>
       </div>
     </div>
   );
