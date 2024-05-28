@@ -18,7 +18,9 @@ const LikeButton = ({ post }: { post: PostWithExtra }) => {
               : "cursor-pointer text-xl hover:text-red-600"
           }
         />
-        <p className="-mt-1">{likes ? likes.length : null}</p>
+        {likes.length > 0 ? (
+          <p className="-mt-1">{likes ? likes.length : null}</p>
+        ) : null}
       </div>
     </div>
   );

@@ -1,11 +1,18 @@
 import { UserWithExtra } from "@/lib/alltypes";
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
+import React, { useId } from "react";
 import { FaArrowLeftLong } from "react-icons/fa6";
 import AllPost from "./AllPost";
+import { CiCircleMore } from "react-icons/ci";
+import { MdForwardToInbox } from "react-icons/md";
+import { getUserID } from "@/lib/userId";
+import Button from "./Button";
+import { fetchFollower } from "@/lib/fetch";
 
-const ProfileDetails = ({ user }: { user: UserWithExtra }) => {
+const ProfileDetails = async ({ user }: { user: UserWithExtra }) => {
+  const userId = await getUserID()
+  const follows = await fetchFollower(user.id)
   return (
     <>
       <div className="flex h-8 items-center w-1/3 justify-center gap-10">
@@ -43,9 +50,19 @@ const ProfileDetails = ({ user }: { user: UserWithExtra }) => {
             </p>
           </div>
         </div>
-        <button className="border h-fit px-3 py-1 rounded-full font-semibold hover:bg-gray-200">
-          Edit profile
-        </button>
+        <div className="flex gap-3">
+          <CiCircleMore className="text-4xl text-gray-500 cursor-pointer" />
+          <MdForwardToInbox className="text-xl text-gray-500 w-8 h-8 border rounded-full cursor-pointer" />
+          {user.id === userId ? (
+            <button className="border h-fit px-3 py-1 rounded-full font-semibold hover:bg-gray-200 ">
+              Edit profile
+            </button>
+          ) : (
+            <div className="h-fit -mt-5">
+              <Button user={user} follows={follows}/>
+            </div>
+          )}
+        </div>
       </div>
 
       <div>

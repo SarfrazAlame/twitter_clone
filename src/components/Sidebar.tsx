@@ -1,10 +1,11 @@
-import { fetchUser } from "@/lib/fetch";
+import { fetchFollower, fetchUser } from "@/lib/fetch";
 import Image from "next/image";
 import React from "react";
 import Button from "./Button";
 
 const Sidebar = async () => {
   const users: any = await fetchUser();
+  const follows = await fetchFollower(users.id);
 
   return (
     <div className="w-full text-center">
@@ -30,7 +31,7 @@ const Sidebar = async () => {
                 <p>{user.email}</p>
               </div>
             </div>
-            <Button user={user} />
+            <Button user={user} follows={follows} />
           </div>
         ))}
       </div>

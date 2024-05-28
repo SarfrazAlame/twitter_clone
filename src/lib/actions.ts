@@ -140,6 +140,28 @@ export const commentPost = async (comment: string, postId: string) => {
 export const followUser = async (id: string) => {
     const userId = await getUserID()
 
+    const follows = await prisma.follows.findUnique({
+        where: {
+            followerId_followingId: {
+                followerId: userId,
+                followingId: id
+            }
+        }
+    })
+    if (follows) {
+        await prisma.follows.delete({
+            where: {
+                followerId_followingId: {
+                    followerId: userId,
+                    followingId: id
+                }
+            }
+        })
+        revalidatePath('/dashboard/home')
+        return {
+            message:"database error"
+        }
+    }
     try {
         await prisma.follows.create({
             data: {

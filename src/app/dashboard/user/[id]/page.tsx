@@ -1,6 +1,4 @@
-import Comments from "@/components/Comments";
 import PostReply from "@/components/PostReply";
-import ProfileDetails from "@/components/ProfileDetails";
 import ShowComments from "@/components/ShowComments";
 import Timestamp from "@/components/Timestamp";
 import { getAuthOptions } from "@/lib/auth";
@@ -47,7 +45,9 @@ const page = async ({ params: { id } }: { params: { id: string } }) => {
             <div className="flex w-full justify-between my-4 border-t py-3">
               <div className="flex gap-2">
                 <FaRegComment className="cursor-pointer rounded-full  hover:text-blue-400" />
-                <p className="-mt-1">{posts?.comments.length}</p>
+                {posts.comments.length > 0 ? (
+                  <p className="-mt-1">{posts?.comments.length}</p>
+                ) : null}
               </div>
               <BiRepost className="cursor-pointer text-xl rounded-full hover:text-green-400" />
               <div className="flex">
@@ -58,7 +58,7 @@ const page = async ({ params: { id } }: { params: { id: string } }) => {
                       : "cursor-pointer rounded-full  hover:text-red-400"
                   }
                 />
-                <p>{posts?.likes.length}</p>
+                {posts.likes.length > 0 ? <p>{posts?.likes.length}</p> : null}
               </div>
               <Bookmark className="cursor-pointer rounded-full  hover:text-blue-400" />
               <GoShare className="cursor-pointer rounded-full  hover:text-blue-400" />

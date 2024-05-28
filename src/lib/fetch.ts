@@ -148,30 +148,58 @@ export const fetchUserById = async (id: string) => {
 }
 
 export const fetchCommentWithPostId = async (id: string) => {
+    noStore()
+
     try {
-        const comments = await prisma.post.findFirst({
+        const data = await prisma.post.findUnique({
+            where: {
+                id
+            },
             include: {
-                user: true,
                 comments: {
                     include: {
-                        user: {
-                            select: {
-                                username: true
-                            }
-                        }
+                        user: true
+                    },
+                    orderBy: {
+                        createdAt: "desc"
                     }
                 },
                 likes: {
                     include: {
                         user: true
                     }
+                },
+                user: true
+            }
+        })
+        return data?.comments.map((comment) => { comment.user.name })
+    } catch (error) {
+        console.log(error)
+        return {
+            message: "Error failed to fetch comments"
+        }
+    }
+}
+
+
+export const fetchFollower = async (id: string) => {
+    noStore()
+    const userId = await getUserID()
+
+    try {
+        const follower = await prisma.follows.findUnique({
+            where: {
+                followerId_followingId: {
+                    followerId: userId,
+                    followingId: id
                 }
             }
         })
-        return comments
+        return follower
     } catch (error) {
+        console.log(error)
         return {
-            message: "Error failed to fetch comments"
+            message: "failed to fetch follower"
         }
     }
 }

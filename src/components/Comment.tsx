@@ -18,7 +18,9 @@ const Comment = ({ post }: { post: PostWithExtra }) => {
         <DialogTrigger>
           <div className="flex gap-2">
             <FaRegComment className="text-gray-600 cursor-pointer hover:text-blue-500" />
-            <p className="-mt-1">{post.comments.length}</p>
+            {post.comments.length > 0 ? (
+              <p className="-mt-1">{post.comments.length}</p>
+            ) : null}
           </div>
         </DialogTrigger>
         <DialogContent>
