@@ -7,7 +7,7 @@ const page = async ({ params: { id } }: { params: { id: string } }) => {
   return (
     <>
       <div className="w-full">
-        <ProfileDetails user={user} />
+        <ProfileDetails user={user} id={id}/>
       </div>
     </>
   );

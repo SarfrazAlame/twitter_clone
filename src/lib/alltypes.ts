@@ -10,7 +10,7 @@ export type PostWithExtra = Post & {
 }
 
 export type UserWithExtra = User & {
-    posts:Post[],
+    posts:PostWithExtra[],
     likes:LikeWithExtra[],
     followers:Follows[],
     following:Follows[]

@@ -4,9 +4,10 @@ import React from "react";
 
 const page = async () => {
   const user: any = await fetchUsers();
+  const id = "";
   return (
     <>
-      <ProfileDetails user={user} />
+      <ProfileDetails user={user} id={id} />
     </>
   );
 };

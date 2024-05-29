@@ -1,4 +1,4 @@
-import { UserWithExtra } from "@/lib/alltypes";
+import { PostWithExtra, UserWithExtra } from "@/lib/alltypes";
 import Image from "next/image";
 import Link from "next/link";
 import React, { useId } from "react";
@@ -8,12 +8,30 @@ import { CiCircleMore } from "react-icons/ci";
 import { MdForwardToInbox } from "react-icons/md";
 import { getUserID } from "@/lib/userId";
 import Button from "./Button";
-import { fetchAllPost, fetchFollower } from "@/lib/fetch";
+import {
+  fetchAllPost,
+  fetchFollower,
+  fetchPosts,
+  fetchPostsById,
+} from "@/lib/fetch";
+import Alldata from "./Alldata";
 
-const ProfileDetails = async ({ user }: { user: UserWithExtra }) => {
+const ProfileDetails = async ({
+  user,
+  id,
+}: {
+  user: UserWithExtra;
+  id: string;
+}) => {
   const userId = await getUserID();
   const follows = await fetchFollower(user.id);
-  const posts:any = await fetchAllPost()
+  const posts = await fetchPosts();
+  
+  const post = posts.map((post:PostWithExtra)=>{
+    return post
+  })
+
+  const postq = posts.filter((post) => post.user.id === id);
   return (
     <>
       <div className="flex h-8 items-center w-1/3 justify-center gap-10">
@@ -67,7 +85,13 @@ const ProfileDetails = async ({ user }: { user: UserWithExtra }) => {
       </div>
 
       <div>
-        <AllPost post={posts}/>
+        <Alldata />
+      </div>
+
+      <div>
+        {postq.map((data) => (
+          <AllPost key={data.id} data={data} post={post}/>
+        ))}
       </div>
     </>
   );

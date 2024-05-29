@@ -234,3 +234,33 @@ export const fetchAllPost = async () => {
         }
     }
 }
+
+
+export const fetchPostsById = async (id: string) => {
+    noStore()
+    try {
+        const posts = await prisma.post.findFirst({
+            where: {
+                id
+            },
+            include: {
+                comments: {
+                    include: {
+                        user: true
+                    }
+                },
+                likes: {
+                    include: {
+                        user: true
+                    }
+                },
+                user: true
+            }
+        })
+        return posts
+    } catch (error) {
+        return {
+            message:"database error"
+        }
+    }
+}
