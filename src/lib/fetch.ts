@@ -203,3 +203,34 @@ export const fetchFollower = async (id: string) => {
         }
     }
 }
+
+export const fetchAllPost = async () => {
+    noStore()
+    const userId = await getUserID()
+    try {
+        const posts = await prisma.post.findMany({
+            where: {
+                userId
+            },
+            include: {
+                comments: {
+                    include: {
+                        user: true
+                    }
+                },
+                likes: {
+                    include: {
+                        user: true
+                    }
+                },
+                user: true
+            }
+        })
+        return posts
+    } catch (error) {
+        console.log(error)
+        return {
+            message: "database error"
+        }
+    }
+}

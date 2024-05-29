@@ -8,11 +8,12 @@ import { CiCircleMore } from "react-icons/ci";
 import { MdForwardToInbox } from "react-icons/md";
 import { getUserID } from "@/lib/userId";
 import Button from "./Button";
-import { fetchFollower } from "@/lib/fetch";
+import { fetchAllPost, fetchFollower } from "@/lib/fetch";
 
 const ProfileDetails = async ({ user }: { user: UserWithExtra }) => {
-  const userId = await getUserID()
-  const follows = await fetchFollower(user.id)
+  const userId = await getUserID();
+  const follows = await fetchFollower(user.id);
+  const posts:any = await fetchAllPost()
   return (
     <>
       <div className="flex h-8 items-center w-1/3 justify-center gap-10">
@@ -59,14 +60,14 @@ const ProfileDetails = async ({ user }: { user: UserWithExtra }) => {
             </button>
           ) : (
             <div className="h-fit -mt-5">
-              <Button user={user} follows={follows}/>
+              <Button user={user} follows={follows} />
             </div>
           )}
         </div>
       </div>
 
       <div>
-        <AllPost />
+        <AllPost post={posts}/>
       </div>
     </>
   );
