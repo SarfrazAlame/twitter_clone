@@ -159,7 +159,7 @@ export const followUser = async (id: string) => {
         })
         revalidatePath('/dashboard/home')
         return {
-            message:"database error"
+            message: "database error"
         }
     }
     try {

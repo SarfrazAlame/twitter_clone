@@ -8,12 +8,7 @@ import { CiCircleMore } from "react-icons/ci";
 import { MdForwardToInbox } from "react-icons/md";
 import { getUserID } from "@/lib/userId";
 import Button from "./Button";
-import {
-  fetchAllPost,
-  fetchFollower,
-  fetchPosts,
-  fetchPostsById,
-} from "@/lib/fetch";
+import { fetchFollower, fetchPosts } from "@/lib/fetch";
 import Alldata from "./Alldata";
 
 const ProfileDetails = async ({
@@ -31,7 +26,7 @@ const ProfileDetails = async ({
     return post;
   });
 
-  const postq = posts.filter((post) => post.user.id === id);
+  const postq = posts.filter((post:PostWithExtra) => post.user.id === id);
   return (
     <>
       <div className="flex h-8 items-center w-1/3 justify-center gap-10">
@@ -90,8 +85,7 @@ const ProfileDetails = async ({
 
       <div>
         {postq.map((data) => (
-          // @ts-ignore
-          <AllPost key={data.id} data={data} post={post} />
+          <AllPost key={data.id} post={data}/>
         ))}
       </div>
     </>

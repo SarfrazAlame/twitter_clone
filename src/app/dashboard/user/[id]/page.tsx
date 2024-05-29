@@ -39,7 +39,7 @@ const page = async ({ params: { id } }: { params: { id: string } }) => {
             <p className="mt-3">{posts?.title}</p>
 
             <div>
-              <Timestamp createAt={posts?.createAt} className="" />
+               {/* <p>{posts?.createdAt}</p> */}
             </div>
 
             <div className="flex w-full justify-between my-4 border-t py-3">
