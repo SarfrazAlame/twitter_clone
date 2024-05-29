@@ -260,7 +260,27 @@ export const fetchPostsById = async (id: string) => {
         return posts
     } catch (error) {
         return {
-            message:"database error"
+            message: "database error"
+        }
+    }
+}
+
+
+export const fetchLike = async (id: string) => {
+    const userId = await getUserID()
+    noStore()
+    try {
+        const like = await prisma.like.findFirst({
+            where: {
+                userId: userId,
+                postId: id
+            }
+        })
+        return like
+    } catch (error) {
+        console.log(error)
+        return {
+            message: "database error"
         }
     }
 }

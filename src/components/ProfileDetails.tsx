@@ -19,7 +19,7 @@ const ProfileDetails = async ({
   id: string;
 }) => {
   const userId = await getUserID();
-  const follows = await fetchFollower(user.id);
+  const follows = await fetchFollower(user?.id);
   const posts = await fetchPosts();
 
   const post = posts.map((post: PostWithExtra) => {
@@ -67,7 +67,7 @@ const ProfileDetails = async ({
         <div className="flex gap-3">
           <CiCircleMore className="text-4xl text-gray-500 cursor-pointer" />
           <MdForwardToInbox className="text-xl text-gray-500 w-8 h-8 border rounded-full cursor-pointer" />
-          {user.id === userId ? (
+          {user?.id === userId ? (
             <button className="border h-fit px-3 py-1 rounded-full font-semibold hover:bg-gray-200 ">
               Edit profile
             </button>
