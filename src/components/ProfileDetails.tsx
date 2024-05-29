@@ -26,10 +26,10 @@ const ProfileDetails = async ({
   const userId = await getUserID();
   const follows = await fetchFollower(user.id);
   const posts = await fetchPosts();
-  
-  const post = posts.map((post:PostWithExtra)=>{
-    return post
-  })
+
+  const post = posts.map((post: PostWithExtra) => {
+    return post;
+  });
 
   const postq = posts.filter((post) => post.user.id === id);
   return (
@@ -90,7 +90,8 @@ const ProfileDetails = async ({
 
       <div>
         {postq.map((data) => (
-          <AllPost key={data.id} data={data} post={post}/>
+          // @ts-ignore
+          <AllPost key={data.id} data={data} post={post} />
         ))}
       </div>
     </>

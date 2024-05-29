@@ -4,13 +4,14 @@ import { Post, User } from "@prisma/client";
 import Image from "next/image";
 import Comments from "./Comments";
 import { PostWithExtra } from "@/lib/alltypes";
+import AllButtn from "./AllButtn";
 
 const AllPost = ({
   data,
   post,
 }: {
   data: Post & { user: User };
-  post: PostWithExtra[];
+  post: PostWithExtra;
 }) => {
   const [state, setState] = useState("");
   return (
@@ -31,8 +32,8 @@ const AllPost = ({
             <div className="my-2">{data.title}</div>
           </div>
         </div>
-        <div>
-          <Comments post={post} />
+        <div className="flex w-full justify-between">
+          <AllButtn post={post}/>
         </div>
       </div>
     </>
