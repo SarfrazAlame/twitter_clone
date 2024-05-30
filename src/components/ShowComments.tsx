@@ -1,17 +1,14 @@
 import { User } from "@prisma/client";
 import Image from "next/image";
 import React from "react";
-import Comments from "./Comments";
-import { PostWithExtra } from "@/lib/alltypes";
+import CommentPost from "./CommentPost";
 
 const ShowComments = async ({
   comment,
   user,
-  posts
 }: {
   comment: string | null;
   user: User;
-  posts:PostWithExtra
 }) => {
   return (
     <>
@@ -36,7 +33,7 @@ const ShowComments = async ({
         ) : null}
       </div>
       <div>
-        <Comments post={posts} />
+        <CommentPost/>
       </div>
     </>
   );

@@ -87,7 +87,6 @@ const page = async ({ params: { id } }: { params: { id: string } }) => {
               key={comment.body}
               comment={comment.body}
               user={comment.user}
-              posts={posts}
             />
           ))
         }
