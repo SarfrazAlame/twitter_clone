@@ -11,6 +11,7 @@ import { Input } from "./ui/input";
 import { CreatePost } from "@/lib/schema";
 import { createPost } from "@/lib/actions";
 import { toast } from "sonner";
+import { title } from "process";
 
 const FormHandler = () => {
   const form = useForm<z.infer<typeof CreatePost>>({

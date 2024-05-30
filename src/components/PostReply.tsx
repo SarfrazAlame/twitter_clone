@@ -30,15 +30,21 @@ const PostReply = ({ user, postId }: { user: UserProps; postId: string }) => {
           <input
             onChange={(e) => setComment(e.target.value)}
             type="text"
+            autoComplete="off"
             placeholder="Post your reply"
             className="outline-none text-xl"
           />
         </div>
         <button
-          className="bg-blue-600 px-5 text-white rounded-full"
-          onClick={() => commentPost(comment, postId)}
+          className={
+            comment?.length > 0
+              ? "bg-blue-600 px-5 text-white rounded-full"
+              : ""
+          }
+          onClick={() => {
+            setComment(""), commentPost(comment, postId);
+          }}
         >
-          {" "}
           Post
         </button>
       </div>
