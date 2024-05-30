@@ -26,7 +26,7 @@ const ProfileDetails = async ({
     return post;
   });
 
-  const postq = posts.filter((post:PostWithExtra) => post.user.id === id);
+  const postq = posts.filter((post: PostWithExtra) => post.user.id === id);
   return (
     <>
       <div className="flex h-8 items-center w-1/3 justify-center gap-10">
@@ -56,12 +56,12 @@ const ProfileDetails = async ({
             <p>{user?.email}</p>
           </div>
           <div className="mt-7 flex gap-5">
-            <p className="hover:underline cursor-pointer">
+            <Link href={"/dashboard/following"} className="hover:underline cursor-pointer">
               {user?.following.length} following
-            </p>
-            <p className="hover:underline cursor-pointer">
+            </Link>
+            <Link href={"/dashboard/follower"} className="hover:underline cursor-pointer">
               {user?.followers.length} followers
-            </p>
+            </Link>
           </div>
         </div>
         <div className="flex gap-3">
@@ -85,7 +85,7 @@ const ProfileDetails = async ({
 
       <div>
         {postq.map((data) => (
-          <AllPost key={data.id} post={data}/>
+          <AllPost key={data.id} post={data} />
         ))}
       </div>
     </>
