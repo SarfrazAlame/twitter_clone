@@ -2,11 +2,7 @@ import AllFollowers from "@/components/AllFollowers";
 import React from "react";
 
 const page = () => {
-  return (
-    <>
-      <AllFollowers />
-    </>
-  );
+  return <>asdfsadfwsr</>;
 };
 
 export default page;
