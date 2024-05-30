@@ -89,7 +89,12 @@ export const fetchPostById = async (id: string) => {
             include: {
                 comments: {
                     include: {
-                        user: true
+                        user: {
+                            select: {
+                                image: true,
+                                name: true
+                            }
+                        }
                     },
                     orderBy: {
                         createdAt: "desc"
@@ -281,6 +286,25 @@ export const fetchLike = async (id: string) => {
         console.log(error)
         return {
             message: "database error"
+        }
+    }
+}
+
+export const fetchCommentByPostId = async (id: string) => {
+    noStore()
+    try {
+        const comments = await prisma.comment.findMany({
+            where: {
+                postId: id
+            },
+            include: {
+                user: true
+            }
+        })
+        return comments
+    } catch (error) {
+        return {
+            message: "errror" + error
         }
     }
 }

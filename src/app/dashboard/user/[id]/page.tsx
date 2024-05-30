@@ -2,7 +2,7 @@ import PostReply from "@/components/PostReply";
 import ShowComments from "@/components/ShowComments";
 import Timestamp from "@/components/Timestamp";
 import { getAuthOptions } from "@/lib/auth";
-import { fetchPostById } from "@/lib/fetch";
+import { fetchCommentByPostId, fetchPostById } from "@/lib/fetch";
 import { Bookmark, Heart } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -15,6 +15,9 @@ const page = async ({ params: { id } }: { params: { id: string } }) => {
   const posts: any = await fetchPostById(id);
   const session = await getAuthOptions();
   const user = session?.user;
+
+  const comments = await fetchCommentByPostId(id);
+  console.log(comments);
   return (
     <div className="w-full">
       <div className="flex mx-12 gap-7 h-7 items-center">
@@ -38,9 +41,7 @@ const page = async ({ params: { id } }: { params: { id: string } }) => {
             </div>
             <p className="mt-3">{posts?.title}</p>
 
-            <div>
-               {/* <p>{posts?.createdAt}</p> */}
-            </div>
+            <div>{/* <p>{posts?.createdAt}</p> */}</div>
 
             <div className="flex w-full justify-between my-4 border-t py-3">
               <div className="flex gap-2">
@@ -74,6 +75,8 @@ const page = async ({ params: { id } }: { params: { id: string } }) => {
       <div>
         <ShowComments postId={posts.id} />
       </div>
+
+      <div></div>
     </div>
   );
 };
