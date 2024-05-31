@@ -10,7 +10,6 @@ import { getUserID } from "@/lib/userId";
 import Button from "./Button";
 import { fetchFollower, fetchPosts } from "@/lib/fetch";
 import Alldata from "./Alldata";
-import AllFollowers from "./AllFollowers";
 
 const ProfileDetails = async ({
   user,
@@ -22,10 +21,6 @@ const ProfileDetails = async ({
   const userId = await getUserID();
   const follows = await fetchFollower(user?.id);
   const posts = await fetchPosts();
-
-  const post = posts.map((post: PostWithExtra) => {
-    return post;
-  });
 
   const postq = posts.filter((post: PostWithExtra) => post.user.id === id);
   return (
@@ -58,13 +53,13 @@ const ProfileDetails = async ({
           </div>
           <div className="mt-7 flex gap-5">
             <Link
-              href={"/dashboard/following"}
+              href={`/dashboard/following/${user.id}`}
               className="hover:underline cursor-pointer"
             >
               {user?.following.length} following
             </Link>
             <Link
-              href={"/dashboard/follower"}
+              href={`/dashboard/follower/${user.id}`}
               className="hover:underline cursor-pointer"
             >
               {user?.followers.length} followers
@@ -85,6 +80,8 @@ const ProfileDetails = async ({
           )}
         </div>
       </div>
+
+      <div></div>
 
       <div>
         <Alldata />

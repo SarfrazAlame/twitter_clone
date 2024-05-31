@@ -1,14 +1,9 @@
-import { fetchFollowerbyUserId } from "@/lib/fetch";
-import React from "react";
+import React from 'react'
 
-const page = async() => {
-  const follower = await fetchFollowerbyUserId()
-  console.log(follower)
-  return <>
-  <div>
-asaqsd
-  </div>
-  </>;
-};
+const page = () => {
+  return (
+    <div>page</div>
+  )
+}
 
-export default page;
+export default page
