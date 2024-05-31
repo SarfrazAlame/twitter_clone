@@ -309,15 +309,23 @@ export const fetchCommentByPostId = async (id: string) => {
     }
 }
 
-export const fetchFollowerbyUserId = async () => {
-    const userId = await getUserID()
+export const fetchFollowerbyUserId = async (id: string) => {
     try {
         const followers = await prisma.follows.findMany({
             where: {
-                followingId: userId
+                followingId: id
             },
+            include: {
+                follower: {
+                    select: {
+                        name: true,
+                        email: true,
+                        image: true
+                    }
+                }
+            }
         })
-        return followers
+        return followers 
     } catch (error) {
         return {
             message: "database error"

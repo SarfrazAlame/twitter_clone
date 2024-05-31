@@ -11,6 +11,7 @@ export default function DhashboardLayout({
       <div className="w-full flex flex-col">
         {children}
       </div>
+
     </>
   );
 }
