@@ -9,7 +9,9 @@ const page = async () => {
   return (
     <div className="w-full h-fit border-b">
       <div className="flex w-full justify-center items-center  gap-4">
+        {/* <Link href={"/dashboard/profile"}> */}
         <GoArrowLeft className="text-2xl cursor-pointer " />
+        {/* </Link> */}
         <div>
           <p className="text-2xl font-bold text-gray-800">{user?.name}</p>
           <p>{user?.email}</p>

@@ -10,6 +10,7 @@ import { getUserID } from "@/lib/userId";
 import Button from "./Button";
 import { fetchFollower, fetchPosts } from "@/lib/fetch";
 import Alldata from "./Alldata";
+import AllFollowers from "./AllFollowers";
 
 const ProfileDetails = async ({
   user,
@@ -56,10 +57,16 @@ const ProfileDetails = async ({
             <p>{user?.email}</p>
           </div>
           <div className="mt-7 flex gap-5">
-            <Link href={"/dashboard/following"} className="hover:underline cursor-pointer">
+            <Link
+              href={"/dashboard/following"}
+              className="hover:underline cursor-pointer"
+            >
               {user?.following.length} following
             </Link>
-            <Link href={"/dashboard/follower"} className="hover:underline cursor-pointer">
+            <Link
+              href={"/dashboard/follower"}
+              className="hover:underline cursor-pointer"
+            >
               {user?.followers.length} followers
             </Link>
           </div>
