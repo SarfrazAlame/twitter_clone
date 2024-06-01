@@ -53,6 +53,11 @@ export const fetchUsers = async () => {
                         user: true
                     }
                 },
+                comments:{
+                    include:{
+                        user:true
+                    }
+                },
                 followers: true,
                 following: true
             }

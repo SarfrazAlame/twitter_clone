@@ -1,21 +1,19 @@
-import Comment from "@/components/Comment";
+import CommentPost from "@/components/CommentPost";
 import Comments from "@/components/Comments";
 import ProfileDetails from "@/components/ProfileDetails";
 import { PostWithExtra } from "@/lib/alltypes";
-import { fetchUsers } from "@/lib/fetch";
+import { fetchCommentWithPostId, fetchUsers } from "@/lib/fetch";
 import Image from "next/image";
 import React from "react";
 
 const page = async () => {
   const user: any = await fetchUsers();
   const id = "";
-  const posts: any = await fetchUsers();
-  console.log(posts);
   return (
     <>
       <ProfileDetails user={user} id={id} />
       <div className="mx-7 ">
-        {posts?.posts.map((post: PostWithExtra) => (
+        {user?.posts.map((post: PostWithExtra) => (
           <>
             <div key={post.id} className="border-b py-4">
               <div className="flex gap-2">
@@ -36,6 +34,7 @@ const page = async () => {
               <p className="mx-12 -mt-2">{post.title}</p>
 
               <div>
+                {/* <CommentPost post={post} /> */}
                 <Comments post={post} />
               </div>
             </div>
