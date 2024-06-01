@@ -8,10 +8,7 @@ export default function DhashboardLayout({
 }) {
   return (
     <>
-      <div className="w-full flex flex-col">
-        {children}
-        asljmdlasknm
-      </div>
+      <div className="w-full flex flex-col">{children}</div>
     </>
   );
 }

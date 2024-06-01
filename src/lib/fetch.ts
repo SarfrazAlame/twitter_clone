@@ -318,6 +318,7 @@ export const fetchFollowerbyUserId = async (id: string) => {
             include: {
                 follower: {
                     select: {
+                        id: true,
                         name: true,
                         email: true,
                         image: true
@@ -325,10 +326,73 @@ export const fetchFollowerbyUserId = async (id: string) => {
                 }
             }
         })
-        return followers 
+        return followers
     } catch (error) {
         return {
             message: "database error"
+        }
+    }
+}
+
+export const fetchFollowingUser = async (id: string) => {
+    try {
+        const followingUser = await prisma.follows.findMany({
+            where: {
+                followerId: id
+            },
+            include: {
+                following: {
+                    select: {
+                        id:true,
+                        name: true,
+                        email: true,
+                        image: true
+                    }
+                }
+            }
+        })
+        return followingUser
+    } catch (error) {
+        return {
+            message: "database error"
+        }
+    }
+}
+
+export const fetchAllFollower = async () => {
+    noStore()
+    try {
+        const follows = await prisma.follows.findMany({})
+        return follows
+    } catch (error) {
+        return {
+            error
+        }
+    }
+}
+
+
+export const fetchUserByUserId = async (id: string) => {
+    noStore()
+    try {
+        const user = await prisma.user.findUnique({
+            where: {
+                id
+            },
+            include: {
+                following: {
+                    select: {
+                        followerId: true,
+                        followingId: true
+                    }
+                },
+            },
+
+        })
+        return user?.following 
+    } catch (error) {
+        return {
+            message:error
         }
     }
 }

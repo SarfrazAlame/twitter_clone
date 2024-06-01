@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   Dialog,
   DialogContent,
@@ -10,7 +10,6 @@ import PostUser from "./PostUser";
 import { PostWithExtra } from "@/lib/alltypes";
 import UserImage from "./UserImage";
 import Inputs from "./Inputs";
-import { fetchLike } from "@/lib/fetch";
 
 const Comment = ({ post }: { post: PostWithExtra }) => {
   return (

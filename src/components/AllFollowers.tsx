@@ -31,12 +31,11 @@ const page = async ({ id }: { id: string }) => {
         >
           Following
         </Link>
-        <Link
-          href={`/dashboard/verified_follower/${user.id}`}
+        <button
           className="px-6 py-4 hover:bg-gray-300"
         >
           Verified Followers
-        </Link>
+        </button>
       </div>
     </div>
   );

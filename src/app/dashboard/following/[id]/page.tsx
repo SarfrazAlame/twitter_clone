@@ -1,19 +1,28 @@
 import AllFollowers from "@/components/AllFollowers";
-import { fetchFollowerbyUserId } from "@/lib/fetch";
+import { fetchFollowingUser } from "@/lib/fetch";
+import { getUserID } from "@/lib/userId";
+import { User } from "@prisma/client";
 import Image from "next/image";
 import React from "react";
 
 const page = async ({ params: { id } }: { params: { id: string } }) => {
-  const follower = await fetchFollowerbyUserId(id);
-  console.log(id);
+  const followerings: any = await fetchFollowingUser(id);
+  const users = await followerings.map((user: any) => {
+    return user.following;
+  });
+
+  const userId = await getUserID();
   return (
     <>
       <div>
         <AllFollowers id={id} />
         <div>
           <div>
-            {/* {users.map((user: User) => (
-              <div className="flex w-full my-5 md:w-4/5 items-center justify-around">
+            {users.map((user: User) => (
+              <div
+                key={user.id}
+                className="flex w-full my-5 md:w-4/5 items-center justify-around"
+              >
                 <div className="flex gap-2">
                   <div>
                     <Image
@@ -29,11 +38,19 @@ const page = async ({ params: { id } }: { params: { id: string } }) => {
                     <p>{user.email}</p>
                   </div>
                 </div>
-                <button className="border h-fit px-5 py-1.5 rounded-full bg-black text-gray-100">
-                  Follow
-                </button>
-              </div> */}
-            {/* ))} */}
+                {user.id === userId ? (
+                  <>
+                    <div className="w-24"></div>
+                  </>
+                ) : (
+                  <>
+                    <button className="border px-3 py-1 rounded-full  bg-black text-white">
+                      follow
+                    </button>
+                  </>
+                )}
+              </div>
+            ))}
           </div>
         </div>
       </div>
