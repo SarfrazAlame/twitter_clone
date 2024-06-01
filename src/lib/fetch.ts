@@ -35,6 +35,44 @@ export async function fetchPosts() {
     }
 }
 
+export async function fetchPostsByUserId() {
+    noStore()
+
+    const userId = await getUserID()
+
+    try {
+        const posts = await prisma.post.findMany({
+            where: {
+                userId
+            },
+            include: {
+                comments: {
+                    include: {
+                        user: true
+                    },
+                    orderBy: {
+                        createdAt: "desc"
+                    }
+                },
+                likes: {
+                    include: {
+                        user: true
+                    }
+                },
+                user: true,
+            },
+            orderBy: {
+                createdAt: "desc"
+            }
+        })
+
+        return posts
+    } catch (error) {
+        console.log(error)
+        throw new Error("Failed to fetch posts")
+    }
+}
+
 export const fetchUsers = async () => {
     const userId = await getUserID()
     try {
@@ -53,9 +91,9 @@ export const fetchUsers = async () => {
                         user: true
                     }
                 },
-                comments:{
-                    include:{
-                        user:true
+                comments: {
+                    include: {
+                        user: true
                     }
                 },
                 followers: true,
@@ -348,7 +386,7 @@ export const fetchFollowingUser = async (id: string) => {
             include: {
                 following: {
                     select: {
-                        id:true,
+                        id: true,
                         name: true,
                         email: true,
                         image: true
@@ -394,10 +432,10 @@ export const fetchUserByUserId = async (id: string) => {
             },
 
         })
-        return user?.following 
+        return user?.following
     } catch (error) {
         return {
-            message:error
+            message: error
         }
     }
 }

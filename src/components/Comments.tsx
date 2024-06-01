@@ -21,6 +21,6 @@ const Comments = async ({ post }: { post: PostWithExtra }) => {
       </div>
     </div>
   );
-};
+};  
 
 export default Comments;
