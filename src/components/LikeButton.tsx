@@ -20,12 +20,12 @@ type Props =
   | null;
 
 const LikeButton = ({ post, like }: { post: PostWithExtra; like: Props }) => {
-  const likes = post.likes;
+  const likes = post?.likes;
   return (
     <div>
       <div className="flex">
         <Heart
-          onClick={() => likesPost(post.id)}
+          onClick={() => likesPost(post?.id)}
           className={
             like && likes?.length > 0
               ? "cursor-pointer text-xl text-red-600  fill-red-600 border-none"

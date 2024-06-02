@@ -341,6 +341,11 @@ export const fetchCommentByPostId = async (id: string) => {
                 postId: id
             },
             include: {
+                Post: {
+                    include: {
+                        user: true
+                    }
+                },
                 user: true
             }
         })

@@ -9,7 +9,7 @@ export default function DhashboardLayout({
   return (
     <>
       <div className="w-full flex flex-col">
-        <AllFollowers />
+        <AllFollowers id={""} />
         {children}
       </div>
     </>

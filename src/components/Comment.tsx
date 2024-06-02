@@ -19,7 +19,7 @@ const Comment = ({ post }: { post: PostWithExtra }) => {
           <div className="flex gap-2">
             <FaRegComment className="text-gray-600 cursor-pointer hover:text-blue-500" />
             {post?.comments?.length > 0 ? (
-              <p className="-mt-1">{post.comments.length}</p>
+              <p className="-mt-1">{post?.comments?.length}</p>
             ) : null}
           </div>
         </DialogTrigger>
@@ -29,7 +29,7 @@ const Comment = ({ post }: { post: PostWithExtra }) => {
               <div className="border-l border-gray-400">
                 <PostUser post={post} />
 
-                <p className="mx-12">{post.title}</p>
+                <p className="mx-12">{post?.title}</p>
                 <p className="mx-10 mt-2">
                   Replying to{" "}
                   <span className="text-blue-400 cursor-pointer">

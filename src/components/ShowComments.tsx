@@ -1,4 +1,4 @@
-import { User } from "@prisma/client";
+import { Post, User } from "@prisma/client";
 import Image from "next/image";
 import React from "react";
 import CommentPost from "./CommentPost";
@@ -6,9 +6,11 @@ import CommentPost from "./CommentPost";
 const ShowComments = async ({
   comment,
   user,
+  post,
 }: {
   comment: string | null;
   user: User;
+  post: Post;
 }) => {
   return (
     <>
@@ -34,7 +36,8 @@ const ShowComments = async ({
           ) : null}
         </div>
         <div>
-          <CommentPost />
+          {/* @ts-ignore */}
+          <CommentPost post={post} />
         </div>
       </div>
     </>

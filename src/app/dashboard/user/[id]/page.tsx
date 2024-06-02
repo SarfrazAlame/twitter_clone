@@ -1,9 +1,10 @@
 import PostReply from "@/components/PostReply";
 import ShowComments from "@/components/ShowComments";
 import Timestamp from "@/components/Timestamp";
+import { PostWithExtra } from "@/lib/alltypes";
 import { getAuthOptions } from "@/lib/auth";
 import { fetchCommentByPostId, fetchPostById } from "@/lib/fetch";
-import { Comment, User } from "@prisma/client";
+import { Comment, Post, User } from "@prisma/client";
 import { Bookmark, Heart } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -80,16 +81,17 @@ const page = async ({ params: { id } }: { params: { id: string } }) => {
       </div> */}
 
       <div className="my-10">
-        {
-          // @ts-ignore
-          comments.map((comment: Comment & { user: User }) => (
+        {/* @ts-ignore */}
+        {comments.map(
+          (comment: Comment & { user: User; post: PostWithExtra }) => (
             <ShowComments
               key={comment.body}
               comment={comment.body}
               user={comment.user}
+              post={comment.post}
             />
-          ))
-        }
+          )
+        )}
       </div>
     </div>
   );

@@ -8,8 +8,8 @@ import Comment from "./Comment";
 import LikeButton from "./LikeButton";
 
 const CommentPost = async ({ post }: { post: PostWithExtra }) => {
-  const comments = await fetchCommentByPostId(post.id);
-  const like = await fetchLike(post.id);
+  const comments = await fetchCommentByPostId(post?.id);
+  const like = await fetchLike(post?.id);
   return (
     <div className="flex w-full justify-around">
       <Comment post={post} />
