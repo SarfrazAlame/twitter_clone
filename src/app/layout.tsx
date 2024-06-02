@@ -29,9 +29,7 @@ export default function RootLayout({
              */
             routerConfig={extractRouterConfig(ourFileRouter)}
           />
-          <RecoilRoot>
             <div className="flex justify-start">{children}</div>
-          </RecoilRoot>
           <Toaster richColors />
         </AuthProvider>
       </body>

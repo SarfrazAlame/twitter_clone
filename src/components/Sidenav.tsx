@@ -73,8 +73,8 @@ const SideNav = async () => {
         </div>
       </div>
 
-      <div className="sm:hidden w-full flex gap-2 h-24">
-        <div className="absolute w-full h-16 flex justify-around">
+      <div className="sm:hidden w-full flex gap-2 h-24 ">
+        <div className="absolute w-full h-16 flex justify-around my-6">
           {LogoBar.map((item) => {
             const IconItem = item.icon;
             return (

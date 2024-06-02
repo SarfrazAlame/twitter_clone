@@ -9,7 +9,7 @@ const AllPost = ({ post }: { post: PostWithExtra }) => {
   return (
     <>
       <div className="border-b">
-        <div className="flex justify-start mt-12 w-full mx-7 ">
+        <div className="flex justify-start mt-12 w-full mx-1 sm:mx-7 ">
           <div>
             <Image
               src={post?.user.image!}
