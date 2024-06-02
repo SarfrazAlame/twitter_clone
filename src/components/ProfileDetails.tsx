@@ -71,9 +71,7 @@ const ProfileDetails = async ({
         </div>
         <div className="sm:flex flex-col gap-3">
           <div className="flex gap-2">
-            <div>
-              <Logout />
-            </div>
+            <div>{user?.id === userId ? <Logout /> : null}</div>
             <CiCircleMore className="text-4xl text-gray-500 cursor-pointer" />
             <MdForwardToInbox className="text-xl text-gray-500 w-8 h-8 border rounded-full cursor-pointer" />
           </div>
